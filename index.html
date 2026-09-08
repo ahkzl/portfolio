@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Ahyana Kizilaslan — Game &amp; Narrative Design</title>
+<meta name="description" content="Portfolio von Ahyana Kizilaslan: Game Design, Narrative Design und QA. Projekte, Storyboards, Kurzgeschichten und Artwork.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ahyana Kizilaslan — Game &amp; Narrative Design">
+<meta property="og:description" content="Game Design, Narrative Design und QA. Projekte, Storyboards, Kurzgeschichten und Artwork.">
+<meta property="og:url" content="https://ahyanakizilaslan.de/">
+<meta property="og:image" content="https://ahyanakizilaslan.de/uploads/portrait.webp">
+<link rel="canonical" href="https://ahyanakizilaslan.de/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"Space Grotesk";src:url("fonts/SpaceGrotesk.ttf") format("truetype-variations");font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("fonts/DMSans.ttf") format("truetype-variations");font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("fonts/DMSans-Italic.ttf") format("truetype-variations");font-weight:100 1000;font-style:italic;font-display:swap}
+:root{--bg:#282828;--bg2:#2f2f2f;--card:#323232;--fg:#f3edea;--muted:#a29892;--line:#3f3f3f;--accent:#e9afbc;--accent-soft:rgba(233,175,188,0.14)}
+:root[data-theme="light"]{--bg:#f7f3f1;--bg2:#fffdfc;--card:#fffdfc;--fg:#282828;--muted:#6d635e;--line:#e4dcd8;--accent:#cf8497;--accent-soft:rgba(207,132,151,0.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip;transition:background .5s ease,color .5s ease}
+section[id]{scroll-margin-top:88px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--fg)}
+::selection{background:var(--accent);color:#282828}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (max-width:760px){#whatido [data-what-row]{grid-template-columns:1fr!important}}
+@keyframes walkRight{0%{transform:translateX(-14vw)}100%{transform:translateX(104vw)}}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}
+@media (max-width:900px){.om-cursor{display:none}}
+</style>
+</helmet>
+
+<div style="position:relative;min-height:100vh;overflow-x:clip">
+
+  <div ref="{{ glowRef }}" style="position:fixed;top:0;left:0;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle, var(--accent-soft) 0%, transparent 62%);pointer-events:none;z-index:0;will-change:transform"></div>
+  <div class="om-cursor" ref="{{ ringRef }}" style="position: fixed; top: 0; left: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 99; mix-blend-mode: difference; will-change: transform"></div>
+  
+
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px clamp(20px,5vw,72px);backdrop-filter:blur(14px);background:color-mix(in oklab, var(--bg) 76%, transparent);border-bottom:1px solid var(--line)">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;color:var(--fg)">
+      <span style="width:11px;height:11px;border-radius:50%;background:var(--accent);display:block;animation:floaty 3.4s ease-in-out infinite"></span>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.01em">ahyana kizilaslan</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:clamp(10px,1.6vw,24px);font-size:14px;letter-spacing:0.02em">
+      <a href="#about" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navAbout }}</a>
+      <a href="#whatido" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navWhat }}</a>
+      <a href="#work" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navWork }}</a>
+      <a href="#narrative" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navNarrative }}</a>
+      <a href="#art" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navArt }}</a>
+      <a href="#contact" style="color:var(--muted)" style-hover="color:var(--fg)">{{ t.navContact }}</a>
+      <div data-noedit="1" style="display:flex;align-items:center;gap:8px;margin-left:6px">
+        <button onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;cursor:pointer;transition:border-color .25s,background .25s" style-hover="border-color:var(--accent);background:var(--accent-soft)">
+          <span style="color:var(--accent)">{{ langLabel }}</span>
+          <span style="color:var(--muted)">/ {{ langOther }}</span>
+        </button>
+        <button onClick="{{ toggleTheme }}" title="{{ t.themeLabel }}" style="width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font-size:14px;cursor:pointer;transition:border-color .25s,background .25s,transform .35s" style-hover="border-color:var(--accent);background:var(--accent-soft);transform:rotate(28deg)">{{ themeIcon }}</button>
+      </div>
+    </nav>
+  </header>
+
+  <section id="top" style="position:relative;z-index:1;padding:clamp(60px,10vh,130px) clamp(20px,5vw,72px) clamp(50px,8vh,90px)">
+    <p style="margin:0 0 26px;font-family:'Space Grotesk',sans-serif;font-size:clamp(11px,1.1vw,13px);letter-spacing:0.32em;text-transform:uppercase;color:var(--accent)">{{ t.roles }}</p>
+    <h1 ref="{{ heroRef }}" style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,9.5vw,148px);line-height:0.92;letter-spacing:-0.04em;text-wrap:balance">
+      <span style="display:block">{{ t.heroA }}</span>
+      <span style="display:block;color:var(--accent)">{{ t.heroB }}</span>
+    </h1>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:clamp(32px,5vw,56px)">
+      <a href="#work" style="padding:15px 30px;border-radius:999px;background:var(--accent);color:#282828;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px;transition:transform .3s cubic-bezier(.2,.9,.2,1),box-shadow .3s" style-hover="transform:translateY(-3px);box-shadow:0 14px 34px var(--accent-soft);color:#282828">{{ t.ctaWork }}</a>
+      <a href="#about" style="padding:15px 30px;border-radius:999px;border:1px solid var(--line);color:var(--fg);font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--accent);transform:translateY(-3px);color:var(--fg)">{{ t.ctaAbout }}</a>
+      <span style="margin-left:6px;font-size:13px;color:var(--muted)">{{ t.available }}</span>
+    </div>
+  </section>
+
+  <div style="position:relative;z-index:2">
+    <img src="uploads/Mechanikerin_Walking_Right_1260.gif" alt="" style="position:absolute;left:0;bottom:calc(100% - 4px);height:clamp(58px,6.5vw,88px);width:auto;image-rendering:pixelated;pointer-events:none;z-index:2;animation:walkRight 30s linear infinite">
+  <div style="position:relative;z-index:1;overflow:hidden;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)">
+    <div style="display:flex;width:max-content;animation:marquee 34s linear infinite;font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)">
+      <span style="display:flex;gap:44px;padding-right:44px">{{ tickerA }}</span>
+      <span style="display:flex;gap:44px;padding-right:44px">{{ tickerB }}</span>
+    </div>
+  </div>
+  </div>
+
+  <section id="about" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,auto));gap:clamp(30px,5vw,56px);align-items:stretch;justify-content:center;max-width:1120px;margin:0 auto;padding:clamp(60px,10vw,130px) clamp(20px,5vw,72px)">
+    <div ref="{{ portraitRef }}" style="position:relative;width:100%;max-width:440px;margin-left:auto;transition:transform .4s cubic-bezier(.2,.9,.2,1);will-change:transform">
+      <img src="uploads/portrait.webp" alt="Ahyana Kizilaslan" data-no-zoom="1" style="display:block;width:100%;height:100%;min-height:400px;object-fit:cover;border-radius:6px"></image-slot>
+      <div style="position:absolute;bottom:-18px;right:-14px;padding:12px 18px;border-radius:4px;background:var(--accent);color:#282828;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase">{{ t.portraitTag }}</div>
+    </div>
+    <div>
+      <h2 style="margin:0 0 28px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);line-height:1.04;letter-spacing:-0.03em">{{ t.aboutTitle }}</h2>
+      <p style="margin:0 0 20px;font-size:clamp(15px,1.35vw,18px);line-height:1.72;color:var(--fg);text-wrap:pretty">{{ t.aboutP1 }}</p>
+      <p style="margin:0 0 20px;font-size:clamp(15px,1.35vw,18px);line-height:1.72;color:var(--muted);text-wrap:pretty">{{ t.aboutP2 }}</p>
+      <p style="margin:0;font-size:clamp(15px,1.35vw,18px);line-height:1.72;color:var(--muted);text-wrap:pretty">{{ t.aboutP3 }}</p>
+    </div>
+  </section>
+
+  <section id="whatido" style="position:relative;z-index:1;padding:clamp(40px,6vw,90px) clamp(20px,5vw,72px);border-top:1px solid var(--line);background:var(--bg2)">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 26px; margin-bottom: clamp(30px,4vw,54px); border-bottom: 1px solid var(--line); position: relative">
+      <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);letter-spacing:-0.03em">{{ t.whatTitle }}</h2>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--muted)">03</span>
+    <img src="./ezgif-com-gif-maker-mtpxn24l-ipro.gif" alt="ezgif-com-gif-maker" width="64" height="64" style="max-width: 100%; height: auto; display: block; object-fit: fill; aspect-ratio: 64 / 64; position: absolute; left: 26%; bottom: -9px"></div>
+    <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden">
+      <sc-for list="{{ t.doing }}" as="d" hint-placeholder-count="3">
+        <div data-what-row="" style="display:grid;grid-template-columns:minmax(120px,0.5fr) minmax(240px,1.7fr) minmax(180px,1.1fr);column-gap:clamp(14px,1.6vw,24px);row-gap:18px;padding:clamp(24px,3vw,40px);background:var(--bg2);transition:background .35s;position:relative" style-hover="background:var(--card)">
+          <div>
+            <p style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--accent)">{{ d.num }}</p>
+            <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,28px);letter-spacing:-0.02em">{{ d.kicker }}</h3>
+          </div><p style="margin:0;max-width:52ch;font-size:clamp(14px,1.2vw,17px);line-height:1.75;color:var(--muted);text-wrap:pretty">{{ d.text }}</p>
+          <div style="align-self:start;justify-self:end;width:100%;max-width:340px"><img src="{{ d.src }}" alt="{{ d.hint }}" data-no-zoom="1" loading="lazy" style="display:block;width:100%;height:auto;border-radius:6px"></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="work" style="position:relative;z-index:1;padding:clamp(50px,8vw,110px) clamp(20px,5vw,72px)">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:26px;margin-bottom:clamp(36px,5vw,64px);border-bottom:1px solid var(--line)">
+      <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);letter-spacing:-0.03em">{{ t.workTitle }}</h2>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--muted)">03</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(48px,7vw,110px)">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+        <article style="position:relative;padding:clamp(22px,3vw,38px);border:1px solid var(--line);border-radius:14px;background:var(--bg2);transition:border-color .4s" style-hover="border-color:var(--accent)">
+          <sc-if value="{{ p.hasCat }}" hint-placeholder-val="{{ false }}">
+            
+          </sc-if>
+          <div onMouseMove="{{ tiltMove }}" onMouseLeave="{{ tiltLeave }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(26px,4vw,56px);transition:transform .5s cubic-bezier(.2,.9,.2,1);will-change:transform">
+            <div style="position: relative">
+              <p style="margin:0 0 14px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.24em;color:var(--accent)">{{ p.num }}</p>
+              <h3 style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.02;letter-spacing:-0.03em">{{ p.title }}</h3>
+              <p style="margin:0 0 22px;font-size:13px;line-height:1.7;color:var(--accent)">{{ p.tags }}</p>
+              <sc-if value="{{ p.hasAward }}" hint-placeholder-val="{{ false }}">
+                <div style="margin:0 0 22px;padding:16px 18px;border:1px solid var(--accent);border-radius:10px;background:var(--accent-soft)">
+                  <p style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent)">{{ p.awardKicker }}</p>
+                  <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+                    <sc-for list="{{ p.awardList }}" as="aw" hint-placeholder-count="2">
+                      <li style="display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.6;color:var(--fg);text-wrap:pretty">
+                        <span style="flex:0 0 auto;font-size:15px;line-height:1.5;color:var(--accent)">★</span>
+                        <span>{{ aw.text }}</span>
+                      </li>
+                    </sc-for>
+                  </ul>
+                </div>
+              </sc-if>
+              <p style="margin:0 0 18px;font-size:clamp(14px,1.2vw,17px);line-height:1.72;color:var(--fg);text-wrap:pretty">{{ p.lead }}</p>
+              <p style="margin:0 0 26px;font-size:14px;line-height:1.75;color:var(--muted);text-wrap:pretty">{{ p.body }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <sc-for list="{{ p.links }}" as="l" hint-placeholder-count="2">
+                  <a href="{{ l.href }}" target="_blank" rel="noopener" style="padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg);transition:background .3s,border-color .3s" style-hover="background:var(--accent);border-color:var(--accent);color:#282828">{{ l.label }}</a>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap">
+                <span style="font-size:13px;line-height:1.6;color:var(--muted);flex:1 1 120px;min-width:0">
+                  <sc-for list="{{ p.shotCaptions }}" as="sc" hint-placeholder-count="5">
+                    <span style="display: {{ sc.disp }}">{{ sc.text }}</span>
+                  </sc-for>
+                </span>
+                <sc-if value="{{ p.bugActive }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{ p.qaClick }}" style="padding:0;border:0;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.14em;color:var(--muted);cursor:pointer" style-hover="color:var(--accent)">{{ p.counter }}</button>
+                </sc-if>
+                <sc-if value="{{ p.bugQuiet }}" hint-placeholder-val="{{ true }}">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.14em;color:var(--muted)">{{ p.counter }}</span>
+                </sc-if>
+              </div>
+              <div style="position:relative;overflow:hidden;border-radius:8px;background:var(--card)">
+                <div data-gallery="carousel" style="display:flex;transition:transform .62s cubic-bezier(.16,.84,.24,1);transform: translateX({{ p.shift }})">
+                  <sc-for list="{{ p.shots }}" as="s" hint-placeholder-count="0">
+                    <div style="flex:0 0 100%;height:clamp(230px,26vw,360px)">
+                      <img src="{{ s.src }}" alt="{{ s.hint }}" data-zoom="1" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain">
+                    </div>
+                  </sc-for>
+                </div>
+                <button onClick="{{ p.prev }}" style="position:absolute;top:50%;left:12px;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border:none;border-radius:50%;background:color-mix(in oklab, var(--bg) 72%, transparent);backdrop-filter:blur(6px);color:var(--fg);font-size:16px;cursor:pointer;transition:background .3s,transform .3s" style-hover="background:var(--accent);color:#282828;transform:translateY(-50%) scale(1.08)">‹</button>
+                <button onClick="{{ p.next }}" style="position:absolute;top:50%;right:12px;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border:none;border-radius:50%;background:color-mix(in oklab, var(--bg) 72%, transparent);backdrop-filter:blur(6px);color:var(--fg);font-size:16px;cursor:pointer;transition:background .3s,transform .3s" style-hover="background:var(--accent);color:#282828;transform:translateY(-50%) scale(1.08)">›</button>
+              </div>
+              <div style="display:flex;gap:6px;width:100%;margin-top:8px">
+                <sc-for list="{{ p.dots }}" as="dot" hint-placeholder-count="3">
+                  <button onClick="{{ dot.go }}" style="flex:1 1 0;min-width:0;height:3px;border:none;border-radius:2px;padding:0;cursor:pointer;transition:background .3s;background: {{ dot.color }}"></button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <button onClick="{{ p.toggleOpen }}" style="display:flex;align-items:center;gap:12px;margin-top:clamp(24px,3vw,36px);padding:14px 22px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.1em;cursor:pointer;transition:border-color .3s,background .3s" style-hover="border-color:var(--accent);background:var(--accent-soft)">
+            <span>{{ p.openLabel }}</span>
+            <span style="color:var(--accent);display:inline-block;transition:transform .35s;transform: rotate({{ p.chevron }})">↓</span>
+          </button>
+
+          <sc-if value="{{ p.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:26px;padding-top:26px;border-top:1px solid var(--line);animation:fadeUp .45s ease both">
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px">
+                <sc-for list="{{ p.tabs }}" as="tab" hint-placeholder-count="4">
+                  <button onClick="{{ tab.go }}" style="padding:9px 16px;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;cursor:pointer;transition:background .3s,color .3s,border-color .3s;border:1px solid {{ tab.border }};background: {{ tab.bg }};color: {{ tab.color }}">{{ tab.label }}</button>
+                </sc-for>
+              </div>
+              <div style="display:grid;gap:clamp(20px,3vw,44px);align-items:start;grid-template-columns: {{ p.panelCols }}">
+                <div>
+                  <h4 style="margin:0 0 14px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(19px,2vw,26px);letter-spacing:-0.02em;color:var(--accent)">{{ p.panelTitle }}</h4>
+                  <p style="margin:0 0 14px;font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--fg);text-wrap:pretty">{{ p.panelText }}</p>
+                  <p style="margin:0 0 14px;font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--muted);text-wrap:pretty">{{ p.panelText2 }}</p>
+                  <sc-if value="{{ p.hasPanelText3 }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:0 0 14px;font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--muted);text-wrap:pretty">{{ p.panelText3 }}</p>
+                  </sc-if>
+                  <sc-if value="{{ p.hasPanelText4 }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:0;font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--muted);text-wrap:pretty">{{ p.panelText4 }}</p>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ p.hasPanelMedia }}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap">
+                      <span style="font-size:13px;line-height:1.6;color:var(--muted);flex:1 1 120px;min-width:0">
+                        <sc-for list="{{ p.panelCaptions }}" as="pc2" hint-placeholder-count="3">
+                          <span style="display: {{ pc2.disp }}">{{ pc2.text }}</span>
+                        </sc-for>
+                      </span>
+                      <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.14em;color:var(--muted)">{{ p.panelCounter }}</span>
+                    </div>
+                    <div style="position:relative;overflow:hidden;border-radius:8px;border:1px solid var(--line);background:var(--card)">
+                      <div data-gallery="panelcar" style="display:flex;transition:transform .55s cubic-bezier(.16,.84,.24,1);transform: translateX({{ p.panelShift }})">
+                        <sc-for list="{{ p.panelCar }}" as="pc" hint-placeholder-count="0">
+                          <div style="position:relative;flex:0 0 100%;height:clamp(240px,27vw,380px);box-sizing:border-box">
+                            <sc-if value="{{ pc.hasImg }}" hint-placeholder-val="{{ false }}">
+                              <div role="img" aria-label="{{ pc.alt }}" data-zoom-src="{{ pc.src }}" style="position:absolute;inset:14px;background-repeat:no-repeat;background-position:center;background-size:contain;cursor:zoom-in;image-rendering: {{ pc.render }};background-image: {{ pc.srcCss }}"></div>
+                            </sc-if>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <sc-if value="{{ p.panelMulti }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ p.panelPrev }}" style="position:absolute;top:50%;left:12px;transform:translateY(-50%);width:38px;height:38px;display:grid;place-items:center;border:none;border-radius:50%;background:color-mix(in oklab, var(--bg) 74%, transparent);backdrop-filter:blur(6px);color:var(--fg);font-size:16px;cursor:pointer;transition:background .3s,transform .3s" style-hover="background:var(--accent);color:#282828;transform:translateY(-50%) scale(1.08)">‹</button>
+                        <button onClick="{{ p.panelNext }}" style="position:absolute;top:50%;right:12px;transform:translateY(-50%);width:38px;height:38px;display:grid;place-items:center;border:none;border-radius:50%;background:color-mix(in oklab, var(--bg) 74%, transparent);backdrop-filter:blur(6px);color:var(--fg);font-size:16px;cursor:pointer;transition:background .3s,transform .3s" style-hover="background:var(--accent);color:#282828;transform:translateY(-50%) scale(1.08)">›</button>
+                      </sc-if>
+                    </div>
+                    <div style="display:flex;gap:6px;width:100%;margin-top:8px">
+                      <sc-for list="{{ p.panelDots }}" as="pd" hint-placeholder-count="3">
+                        <button onClick="{{ pd.go }}" style="flex:1 1 0;min-width:0;height:3px;border:none;border-radius:2px;padding:0;cursor:pointer;transition:background .3s;background: {{ pd.color }}"></button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+        </article>
+      </sc-for>
+    </div>
+  <img src="uploads/Catgro.gif" alt="" style="position: absolute; width: clamp(112px,13vw,168px); height: auto; image-rendering: pixelated; pointer-events: none; z-index: 3; top: 167px; right: 10%"></section>
+
+  <section id="narrative" style="position:relative;z-index:1;padding:clamp(50px,8vw,110px) clamp(20px,5vw,72px);border-top:1px solid var(--line);background:var(--bg2)">
+    <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:26px;margin-bottom:clamp(30px,4vw,54px);border-bottom:1px solid var(--line)">
+      
+      <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);letter-spacing:-0.03em;text-wrap:balance">{{ t.narrativeTitle }}</h2>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--muted)">03</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(20px,3vw,34px)">
+      <sc-for list="{{ stories }}" as="s" hint-placeholder-count="3">
+        <div style="position:relative;perspective:2200px">
+          <div style="position:relative;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.8,.2,1);transform: rotateY({{ s.flip }})">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: clamp(20px,3vw,44px); align-items: center; padding: clamp(18px,2.4vw,28px); border: 1px solid var(--line); border-radius: 12px; background: var(--bg); transition: border-color .35s; backface-visibility:hidden; -webkit-backface-visibility:hidden; transition: border-color .35s; position: {{ s.frontPos }}; inset:0; pointer-events: {{ s.frontPE }}" style-hover="border-color:var(--accent)">
+              <div data-gallery="story" style="order: {{ s.order }}">
+                <img src="{{ s.src }}" alt="{{ s.hint }}" data-no-zoom="1" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;border:1px solid var(--line)">
+              </div>
+              <div>
+                <h3 style="margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,32px);line-height:1.1;letter-spacing:-0.02em">{{ s.title }}</h3>
+                <p style="margin:0 0 16px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)">{{ s.genre }}</p>
+                <p style="margin:0 0 20px;font-size:clamp(14px,1.2vw,17px);line-height:1.75;color:var(--muted);text-wrap:pretty">{{ s.logline }}</p>
+                <button onClick="{{ s.toggle }}" style="padding:11px 20px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:border-color .3s,background .3s" style-hover="border-color:var(--accent);background:var(--accent-soft)">{{ t.readSample }}</button>
+              </div>
+            </div>
+            <div style="inset:0;display:flex;flex-direction:column;gap:16px;padding:clamp(18px,2.4vw,28px);border:1px solid var(--accent);border-radius:12px;background:var(--card);transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;position: {{ s.backPos }}; min-height: {{ s.backMinH }}; pointer-events: {{ s.backPE }}">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line)">
+                <div>
+                  <p style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)">{{ t.excerptKicker }}</p>
+                  <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(19px,2.1vw,28px);line-height:1.1;letter-spacing:-0.02em">{{ s.title }}</h3>
+                </div>
+                <button onClick="{{ s.toggle }}" style="flex:0 0 auto;padding:10px 18px;border:1px solid var(--accent);border-radius:999px;background:transparent;color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s" style-hover="background:var(--accent);color:#282828">{{ t.hideSample }}</button>
+              </div>
+              <div style="flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding-right:14px;scrollbar-gutter:stable">
+                <div style="columns:clamp(180px,20vw,240px);column-gap:clamp(20px,2.6vw,34px);column-rule:1px solid var(--line)">
+                  <sc-for list="{{ s.excerpt }}" as="line" hint-placeholder-count="6">
+                    <p style="margin:0 0 0.85em;font-size:13.5px;line-height:1.72;color:var(--muted);text-wrap:pretty;break-inside:avoid">{{ line }}</p>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <sc-if value="{{ s.hasNpc }}" hint-placeholder-val="{{ false }}">
+            <img src="uploads/Npc%20-%20Smoking1280.gif" alt="" style="position: absolute; height: clamp(78px,9.5vw,140px); width: auto; image-rendering: pixelated; pointer-events: none; z-index: 3; right: -42px; bottom: -2px">
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="art" style="position:relative;z-index:1;padding:clamp(50px,8vw,110px) clamp(20px,5vw,72px)">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:26px;margin-bottom:clamp(30px,4vw,54px);border-bottom:1px solid var(--line)">
+      <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);letter-spacing:-0.03em">{{ t.artTitle }}</h2>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--muted)">03</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(48px,7vw,100px)">
+      <sc-for list="{{ artGroups }}" as="g" hint-placeholder-count="3">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(18px,3vw,44px);padding-top: {{ g.rulePad }};border-top: {{ g.rule }}">
+          <div style="min-width:0;flex: {{ g.textFlex }}">
+          <div style="display:grid;align-items:start;grid-template-columns: {{ g.headCols }};gap: {{ g.headGap }};margin-bottom:clamp(22px,3vw,34px)">
+            <div style="grid-column: {{ g.headSpan }};display: {{ g.headDisp }};align-items:baseline;flex-wrap:wrap;gap:clamp(14px,2.4vw,32px)">
+              <h3 style="margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,34px);line-height:1.08;letter-spacing:-0.02em">{{ g.title }}</h3>
+              <p style="margin:0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)">{{ g.role }}</p>
+            <sc-if value="{{ g.linkInPair }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: {{ g.headLinkTop }}">
+                <a href="{{ g.href }}" target="_blank" rel="noopener" style="display:inline-block;padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg);transition:background .3s,border-color .3s" style-hover="background:var(--accent);border-color:var(--accent);color:#282828">{{ g.linkLabel }}</a>
+              </div>
+            </sc-if>
+            </div>
+            <div style="grid-column: {{ g.textSpan }};max-width: {{ g.textMax }};column-gap:clamp(18px,2.4vw,32px);columns: {{ g.textCols }}">
+              <p style="margin:0 0 12px;font-size:clamp(14px,1.2vw,16px);line-height:1.78;color:var(--muted);text-wrap:pretty;break-inside: {{ g.textBreak }}">{{ g.text }}</p>
+              <sc-if value="{{ g.hasText2 }}" hint-placeholder-val="{{ false }}">
+                <p style="margin: 0 0 12px; font-size: clamp(14px,1.2vw,16px); line-height: 1.78; color: var(--muted); text-wrap: pretty; text-align: left; break-inside: {{ g.textBreak }}">{{ g.text2 }}</p>
+              </sc-if>
+              <sc-if value="{{ g.hasText3 }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0 0 12px;font-size:clamp(14px,1.2vw,16px);line-height:1.78;color:var(--muted);text-wrap:pretty;break-inside: {{ g.textBreak }}">{{ g.text3 }}</p>
+              </sc-if>
+              <sc-if value="{{ g.hasText4 }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0 0 12px;font-size:clamp(14px,1.2vw,16px);line-height:1.78;color:var(--muted);text-wrap:pretty;break-inside: {{ g.textBreak }}">{{ g.text4 }}</p>
+              </sc-if>
+            </div>
+            <sc-if value="{{ g.isPair }}" hint-placeholder-val="{{ false }}">
+              <div data-gallery="art-pair" style="display:flex;align-items:flex-start;justify-content:center;gap:clamp(20px,4vw,60px);flex-wrap:wrap">
+                <sc-for list="{{ g.pairImages }}" as="pi" hint-placeholder-count="2">
+                  <div style="flex:0 1 auto;display:flex;flex-direction:column;gap:10px;min-width:0">
+                    <button type="button" title="{{ pi.alt }}" style="display:block;height:clamp(300px,32vw,420px);padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card);cursor:zoom-in;transition:border-color .3s,transform .35s cubic-bezier(.2,.9,.2,1)" style-hover="border-color:var(--accent);transform:translateY(-4px)">
+                      <img src="{{ pi.src }}" alt="{{ pi.alt }}" data-zoom="1" loading="lazy" style="display:block;height:100%;width:auto">
+                    </button>
+                    <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">{{ pi.alt }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <sc-if value="{{ g.linkInText }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:clamp(22px,3vw,32px)">
+              <a href="{{ g.href }}" target="_blank" rel="noopener" style="display:inline-block;padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg);transition:background .3s,border-color .3s" style-hover="background:var(--accent);border-color:var(--accent);color:#282828">{{ g.linkLabel }}</a>
+            </div>
+          </sc-if>
+          </div>
+          <sc-if value="{{ g.hasImages }}" hint-placeholder-val="{{ false }}">
+            <div data-gallery="boards" style="display:flex;flex-basis:100%;width:100%;gap:12px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x proximity">
+              <sc-for list="{{ g.boardImages }}" as="im" hint-placeholder-count="16">
+                <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:8px;scroll-snap-align:start">
+                  <button type="button" title="{{ im.alt }}" style="display:block;height:clamp(300px,32vw,420px);padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card);cursor:zoom-in;transition:border-color .3s,transform .35s cubic-bezier(.2,.9,.2,1)" style-hover="border-color:var(--accent);transform:translateY(-4px)">
+                    <img src="{{ im.src }}" alt="{{ im.alt }}" data-zoom="1" loading="lazy" style="display:block;height:100%;width:auto">
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ g.isMasonry }}" hint-placeholder-val="{{ false }}">
+            <div data-gallery="art-personal" style="flex-basis:100%;width:100%;columns:clamp(160px,19vw,230px);column-gap:14px">
+              <sc-for list="{{ g.masonry }}" as="mi" hint-placeholder-count="13">
+                <button type="button" onMouseMove="{{ tiltMove }}" onMouseLeave="{{ tiltLeave }}" style="display:block;width:100%;break-inside:avoid;margin:0 0 14px;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card);cursor:zoom-in;transition:border-color .3s,transform .4s cubic-bezier(.2,.9,.2,1);will-change:transform" style-hover="border-color:var(--accent)">
+                  <img src="{{ mi.src }}" alt="{{ mi.alt }}" data-zoom="1" loading="lazy" style="display:block;width:100%;height:auto">
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="contact" style="position:relative;z-index:1;padding:clamp(60px,10vw,130px) clamp(20px,5vw,72px);border-top:1px solid var(--line);background:var(--bg2)">
+    <img src="uploads/Blume%20animation.gro%C3%9F.gif" alt="" style="position: absolute; right: clamp(14px,4vw,58px); height: clamp(150px,19vw,215px); width: auto; image-rendering: pixelated; pointer-events: none; z-index: 2; bottom: -6px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(30px,5vw,72px);align-items:center">
+      <div>
+        <p style="margin:0 0 18px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent)">{{ t.contactKicker }}</p>
+        <h2 style="margin:0 0 22px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,5.2vw,72px);line-height:0.98;letter-spacing:-0.04em;text-wrap:balance">{{ t.contactTitle }}</h2>
+        <p style="margin:0 0 14px;max-width:46ch;font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:var(--muted);text-wrap:pretty">{{ t.contactText }}</p>
+        <p style="margin:0;max-width:46ch;font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:var(--muted);text-wrap:pretty">{{ t.contactText2 }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+        <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="3">
+          <a href="{{ c.href }}" target="{{ c.target }}" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 26px;background:var(--bg2);color:var(--fg);transition:background .3s,padding-left .3s" style-hover="background:var(--accent);color:#282828;padding-left:36px">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;opacity:.7">{{ c.label }}</span>
+            <span style="font-size:15px">{{ c.value }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:28px clamp(20px,5vw,72px);border-top:1px solid var(--line);font-size:13px;color:var(--muted)">
+    <span>© {{ year }} Ahyana Kizilaslan</span>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
+      <button type="button" onClick="{{ openImp }}" style="padding:0;border:0;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:inherit;cursor:pointer" style-hover="color:var(--accent)">{{ t.legalImpLink }}</button>
+      <button type="button" onClick="{{ openPriv }}" style="padding:0;border:0;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:inherit;cursor:pointer" style-hover="color:var(--accent)">{{ t.legalPrivLink }}</button>
+      <a href="#top" style="color:var(--muted)" style-hover="color:var(--accent)">{{ t.toTop }}</a>
+    </div>
+  </footer>
+</div>
+
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:22px;bottom:22px;z-index:260;display:flex;align-items:center;gap:16px;max-width:min(92vw,460px);padding:16px 22px;border:1px solid var(--accent);border-radius:12px;background:var(--bg2);box-shadow:0 24px 60px rgba(0,0,0,.35);animation:fadeUp .5s ease both">
+      <span style="flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:18px">★</span>
+      <div style="min-width:0">
+        <p style="margin:0 0 4px;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent)">{{ toastKicker }}</p>
+        <p style="margin:0 0 3px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.01em">{{ toastTitle }}</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:var(--muted);text-wrap:pretty">{{ toastText }}</p>
+        <sc-if value="{{ hasToastCount }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:8px 0 0;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.22em;color:var(--accent)">{{ toastCount }}</p>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasLightbox }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:28px;background:rgba(20,20,20,.92);cursor:zoom-out;overflow:auto">
+      <img ref="{{ lightboxImgRef }}" alt="" onClick="{{ stopZoomClick }}" style="display:block;height:78vh;width:auto;max-width:100%;object-fit:contain;border-radius:4px;cursor:default;box-shadow:0 30px 90px rgba(0,0,0,.6)">
+      <button type="button" onClick="{{ closeLightbox }}" aria-label="Close" style="position:fixed;top:22px;right:26px;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:transparent;color:#fff;font-size:20px;line-height:1;cursor:pointer;transition:background .3s" style-hover="background:var(--accent);color:#282828">×</button>
+      <sc-if value="{{ manyZoom }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <button type="button" onClick="{{ prevZoom }}" aria-label="Previous" style="position:fixed;top:50%;left:18px;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.35);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .3s" style-hover="background:var(--accent);color:#282828">‹</button>
+          <button type="button" onClick="{{ nextZoom }}" aria-label="Next" style="position:fixed;top:50%;right:18px;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.35);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .3s" style-hover="background:var(--accent);color:#282828">›</button>
+          <span style="position:fixed;bottom:22px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.18em;color:rgba(255,255,255,.75)">{{ zoomCounter }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ legalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLegal }}" style="position:fixed;inset:0;z-index:300;display:flex;align-items:flex-start;justify-content:center;padding:clamp(16px,5vh,60px) 16px;background:rgba(18,18,18,.84);overflow-y:auto">
+      <div onClick="{{ stopLegal }}" style="width:min(760px,100%);padding:clamp(24px,4vw,44px);border:1px solid var(--line);border-radius:12px;background:var(--bg2);box-shadow:0 30px 90px rgba(0,0,0,.45)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:clamp(18px,3vw,28px)">
+          <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,38px);letter-spacing:-0.03em">{{ legalTitle }}</h2>
+          <button type="button" onClick="{{ closeLegal }}" aria-label="Close" style="flex:0 0 auto;width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font-size:15px;cursor:pointer" style-hover="border-color:var(--accent);color:var(--accent)">✕</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:clamp(16px,2.4vw,24px)">
+          <sc-for list="{{ legalBlocks }}" as="b" hint-placeholder-count="5">
+            <div>
+              <h3 style="margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)">{{ b.h }}</h3>
+              <p style="margin:0;font-size:15px;line-height:1.7;color:var(--muted);white-space:pre-line;text-wrap:pretty">{{ b.p }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const COPY = {
+  en: {
+    navAbout: "About", navWhat: "What I do", navWork: "Games", navNarrative: "Narrative", navArt: "Art", navContact: "Contact",
+    roles: "Game Design · Narrative Design · Quality Assurance",
+    heroA: "Hello, I am", heroB: "Ahyana Kizilaslan",
+    ctaWork: "View my work", ctaAbout: "About me",
+    available: "Game Production & Management student",
+    themeLabel: "Switch theme",
+    ticker: ["Worldbuilding", "Quest Design", "Dialogue Writing", "Balancing", "Playtesting", "Character Design", "Storyboards", "Short Stories", "QA"],
+    portraitTag: "Nice to meet you",
+    aboutTitle: "About Me",
+    aboutP1: "I'm a Game Production & Management student with a passion for game design, storytelling and creating memorable player experiences.",
+    aboutP2: "What I enjoy most is bringing stories and worlds to life through characters, quests, dialogue and lore. I've had the chance to explore these areas through projects like Bonehearts and the award-winning board game Nexus, working closely with others to bring different creative ideas together.",
+    aboutP3: "My experience in QA at Kalypso Media also taught me to look at games from a player's perspective and pay attention to the details that can make or break an experience. Whether I'm writing a story, designing gameplay or testing a feature, I enjoy finding ways to make games more engaging, polished and fun to play.",
+    whatTitle: "What I do",
+    doing: [
+      { num: "01", slot: "what-1", src: "uploads/what-1.webp", hint: "Gameplay screenshot", kicker: "Game Design", text: "I design gameplay systems and mechanics with a focus on creating intuitive, engaging and meaningful player experiences. My work includes concept development, gameplay design, balancing and connecting mechanics with the wider game world." },
+      { num: "02", slot: "what-2", src: "uploads/what-2.webp", hint: "Dialogue or quest doc", kicker: "Narrative Design", text: "I create stories, characters, dialogue, quests, lore and narrative systems that bring game worlds to life. I focus on integrating narrative with gameplay and environmental storytelling to create cohesive and immersive player experiences." },
+      { num: "03", slot: "what-3", src: "uploads/what-3.webp", hint: "Bug report or test setup", kicker: "Quality Assurance", text: "I evaluate gameplay balance, usability and overall player experience throughout testing phases. My experience includes identifying, reproducing and documenting bugs using Jira, independently handling customer support inquiries and analysing player feedback to identify recurring issues and opportunities for improvement." }
+    ],
+    workTitle: "Featured projects",
+    awardKicker: "Awarded",
+    openMore: "Read the full case", openLess: "Close case",
+    projects: [
+      {
+        title: "Tears and Dust", hasCat: true,
+        tags: "Narrative Design · Worldbuilding · Character Design · Dialogue Writing",
+        lead: "A narrative-driven sci-fi adventure about morality and change, where I worked on characters, dialogue, worldbuilding and story structure.",
+        body: "Hunter is a hardened cyborg bounty hunter hired to locate a group of rebels on a remote desert planet. The narrative challenge was to gradually break down his detached worldview — not through a single revelation, but through the settlers and rebels he meets along the way.",
+        links: [{ label: "itch.io", href: "https://unboundhnu.itch.io/tears-and-dust" }, { label: "Learn more", href: "https://sites.google.com/view/roguephoenixstudio/unsere-games/tears-and-dust" }],
+        award: "\"Tears and Dust\" won a prize at the games.kickstarter at Hochschule für angewandte Wissenschaften Neu-Ulm.",
+        hints: ["The cover art", "The main menu", "The game mechanics", "The Saloon in play", "The design and revision of the road", "The Shop in detail", "The rundown home in detail", "The Saloon in detail", "The ground floor of the Saloon", "The upper floor of the Saloon", "One of the Saloon's rentable rooms", "The Workshop in detail", "The interior of the Workshop"],
+        tabs: [
+          { label: "My contribution", title: "My approach",
+            a: "Together with another team member, I helped shape the atmosphere of the world and developed several of the characters Hunter encounters throughout his journey. We wanted these NPCs to be more than quest givers, they needed to give Hunter a reason to care about a community after spending most of his life alone.",
+            b: "Characters like the Mechanic and the Bartender each contribute to this in a different way. The Mechanic helps Hunter repair his sand speeder and continue his journey, while the Bartender is a forgotten Veritas robot who was originally left behind to gather information. After being abandoned by  the corporation, he simply continued living among the settlers and running the bar." },
+          { label: "The challenge", title: "Breaking down a worldview",
+            a: "\"Tears and Dust\" follows Hunter, a hardened cyborg bounty hunter working for the Veritas Corporation. He is sent to a remote desert planet to track down a group of rebels. Although he knows that the people he finds will likely be killed, Hunter keeps himself emotionally detached from the consequences. He convinces himself that he is not responsible because he is never the one who pulls the trigger.",
+            b: "The narrative challenge was to gradually challenge this way of thinking. We did not want Hunter's perspective to change because of a single revelation or dramatic moment. Instead, his transformation needed to develop naturally through the people he meets and the experiences he has throughout his journey.",
+            c: "By introducing him to the settlers and rebels one encounter at a time, we could slowly challenge the distance he has created between himself and the consequences of his work." },
+          { label: "Our approach", title: "Structuring Hunter's transformation",
+            a: "We structured Hunter's transformation across the different acts of the story, with each act challenging his worldview in a different way. The settlers first introduce him to a community that treats him with unexpected kindness. Later, the rebels save his life without asking for anything in return. The poisoned water then reveals how far Veritas is willing to go to achieve its goals, forcing Hunter to question the corporation he works for. Finally, the destruction of Easthaven makes him confront the consequences of his own actions and complicity.",
+            b: "This progression was designed to make Hunter's change feel gradual rather than sudden. Instead of simply telling the player that his worldview is changing, we let each encounter chip away at his emotional distance.",
+            c: "At the same time, the player gets to know the people of Easthaven alongside Hunter. What initially feels like a simple settlement gradually becomes a community with characters the player has spent time with and learned to care about. Because of this, the destruction of Easthaven becomes a personal loss for both Hunter and the player rather than simply another plot event." },
+          { label: "Competitions", title: "games.kickstarter", shots: ["Certificate"],
+            a: "\"Tears and Dust\" was awarded Best Game of the Semester at our university's end-of-semester showcase, where the projects were evaluated by an external jury.",
+            b: "Following the award, the project also received a €7,000 development grant from the Bavarian Ministry of Education and Cultural Affairs.",
+            c: "The certificate for the award is shown here ->" },
+          { label: "Character design", title: "The Mechanic", mech: true, shots: [],
+            a: "The Mechanic is one of the first settlers Hunter meets on his journey. Her role is to make the settlement feel like a real community that actively interacts with Hunter rather than simply providing him with objectives. Her confident and quick-witted personality also creates a contrast to Hunter's more hardened and reserved nature.",
+            b: "I wanted her visual design to communicate her profession immediately. I gave her additional robotic arms to create a distinctive silhouette while also reinforcing her role as a skilled mechanic. The extra arms allow her to handle tools and repairs more efficiently, making her feel fast, capable and completely at home in her workshop.",
+            c: "I structured the Mechanic's dialogue to change according to the player's progress rather than having her repeat the same conversation. Her greeting changes depending on whether the player is meeting her for the first time, whether the sand speeder is still being repaired or whether the task has already been completed. From a central dialogue hub, the player can ask about individual repair problems and receive contextual hints. The dialogue provides enough information to help the player understand what they need to look for, but deliberately avoids giving away the solution. The actual puzzle still requires the player to explore the environment and find the necessary parts themselves." }
+        ]
+      },
+      {
+        title: "Nexus",
+        tags: "Core Mechanics · Card Balancing · Visual Direction · Rulebook",
+        lead: "An award-winning educational game that combines physical and digital play, where I worked on game mechanics, balancing, visual design and production.",
+        body: "Built for chemistry classes to practise redox reactions. After early prototypes proved too complex, we split the learning goals across two formats: an analogue card game for oxidation states and a digital game for electron exchange.",
+        links: [{ label: "Play the web version", href: "https://roguephoenixstudio.itch.io/nexus" }, { label: "Learn more", href: "https://sites.google.com/view/roguephoenixstudio/unsere-games/nexus" }, { label: "mb21 laudation", href: "https://www.mb21.de/wettbewerbsjahr_2023.html?articles=nexus" }],
+        hints: ["Exhibition of Nexus at mb21", "Nexus unpacked", "Game board with cards and instruction manual", "The main menu of the app", "An ingame screenshot of the app", "Element cards, trump cards, game board and task cards with solutions"],
+        awards: [
+          "In 2023, \"Nexus\" won an award at the German Multimedia Award mb21.",
+          "It was also awarded at the games.kickstarter competition at our university.",
+          "Through mint21, in collaboration with the Realschule Herrsching am Ammersee, the project secured another award. The game is now being used at the school as an educational game."
+        ],
+        tabs: [
+          { label: "My contribution", title: "What I worked on",
+            a: "I contributed to the development and refinement of the core mechanics, with a particular focus on card balancing and simplifying the overall game experience. I also worked on the visual direction, the rulebook and the digital implementation of the game.",
+            b: "Balancing the game meant repeatedly testing different card distributions in actual play. I looked at how often players were left with an unplayable hand, how much bluffing a round could support before the game started to stall and how long a complete game took within the limited time of a school lesson.",
+            c: "These tests helped us identify unnecessary complexity and adjust the mechanics accordingly. The goal was to keep the core gameplay engaging while making the rules simple enough for new players to understand and the game short enough to fit naturally into a classroom setting." },
+          { label: "The challenge", title: "Three cognitive steps at once", shots: [],
+            a: "\"Nexus\" was developed as an educational game for chemistry classes, designed to help students practise redox reactions in a more interactive and engaging way than traditional worksheets.",
+            b: "A redox reaction requires students to work through several cognitive steps: identifying oxidation states, balancing electrons and determining the resulting substances. Our initial approach tried to combine all three learning goals into a single game. While this covered the full process, it also introduced too much complexity and quickly overwhelmed players.",
+            c: "The challenge was therefore to preserve the educational value of the game without making the core gameplay unnecessarily complicated. We needed to find a way to break the learning process into manageable steps while keeping the game engaging and easy to understand." },
+          { label: "Our approach", title: "One learning goal per medium", shots: ["Card game", "How the card game works", "Gameplay: the cards are placed so that FeO is formed", "Once FeO is placed correctly, the element cards go into your own scoring pile", "The main menu of the digital game", "How the digital game works"],
+            a: "We broke the redox process down into smaller interactions and assigned each learning goal to the medium that could communicate it most effectively. Instead of treating chemical elements, ions, electrons and compounds as abstract concepts on paper, we turned them into physical and digital objects that players could directly manipulate.",
+            b: "The analogue card game focuses on identifying oxidation states and breaking compounds down into their individual ions. The digital game then takes over where physical cards become less effective, using interaction and animation to visualise electron exchange and the formation of reaction products.",
+            c: "In the analogue game, players receive three cards and compete to fill the missing spaces on a shared task board. Cards do not necessarily have to be correct. Players can deliberately place incorrect cards, forcing others to evaluate whether the current solution can be trusted. This turns identifying the correct oxidation states into both a chemistry task and a social deduction mechanic.",
+            d: "The digital game takes a more direct approach to the invisible parts of the reaction. Players shake element cards to release electrons, which then fly across the screen and have to be caught and dragged onto the correct ions. By turning electron transfer into a visible and physical interaction, the game makes an otherwise abstract process easier to understand and remember." },
+          { label: "Facts & figures", title: "Designed to fit a lesson",
+            a: "3 learning goals -> oxidation states, electron exchange and reaction products.",
+            b: "25-30 minutes of play, designed to fit within a 45-minute school lesson.",
+            c: "2 formats -> an analogue multiplayer card game and a digital single-player game.",
+            d: "Currently in use at Realschule Herrsching am Ammersee as an educational game for chemistry classes." },
+          { label: "Competitions", title: "Awards and competitions", shots: ["mb21 certificate", "games.kickstarter certificate", "mint21 certificate"],
+            a: "\"Nexus\" received multiple awards and recognitions throughout its development. In 2023, the project was awarded at the German Multimedia Award mb21 and also received a prize at the games.kickstarter competition at our university.",
+            b: "In collaboration with the Realschule Herrsching am Ammersee, the project received further recognition at mint21.",
+            c: "Pictures and certificates are shown here ->" },
+          { label: "What I learned", title: "When to simplify",
+            a: "\"Nexus\" taught me that more mechanics do not necessarily create a better game. Sometimes, removing features and giving each remaining system a clear purpose leads to a much stronger design.",
+            b: "The biggest lesson for me was learning to distinguish between adding complexity and adding meaningful interaction. Simply asking players to place the correct ion would have turned a worksheet into a card game. By introducing bluffing, risk and uncertainty, we gave players a reason to interact with each other rather than simply find the correct answer.",
+            c: "This helped me understand that educational games do not have to sacrifice good game design for their learning goals. The mechanics can support the learning experience while still giving players meaningful decisions to make." }
+        ]
+      },
+      {
+        title: "Bonehearts",
+        tags: "Narrative Design · Quest Design · Worldbuilding · Game Design",
+        lead: "An unreleased action-adventure game where I worked across narrative and game design, contributing to worldbuilding, quests, gameplay and level design.",
+        body: "I contributed to story development, worldbuilding, characters, quests and dialogue and maintained the narrative documentation across disciplines.",
+        links: [{ label: "Steam", href: "https://store.steampowered.com/app/3806400/Bonehearts/" }, { label: "itch.io", href: "https://deus-draconis-interactive.itch.io/bonehearts" }],
+        hints: ["Key art", "Gameplay", "Gameplay", "Gameplay", "Gameplay"],
+        tabs: [
+          { label: "My contribution", title: "Narrative and Game Designer",
+            a: "I contributed to the development of the story, worldbuilding, characters, quests and dialogue. I also created and maintained the project's narrative documentation, helping establish a consistent foundation for the game's story and setting.",
+            b: "Because the narrative needed to work alongside the wider game experience, I collaborated closely with other disciplines to keep the story, characters and gameplay aligned. This included discussing how narrative elements could support gameplay and how gameplay systems could reinforce the world and its characters.",
+            c: "Beyond the writing, I also explored gameplay systems through visual concepts. This included an early concept for a character upgrade system and an in-world merchant interface, using visual design to explore how these systems could fit naturally into the game's world." },
+          { label: "The challenge", title: "Under NDA",
+            a: "\"Bonehearts\" is currently unreleased and under NDA. This means that specific story content, development materials and other internal assets cannot be publicly shared at this stage.",
+            b: "Rather than presenting the project through its final content, I use this section to focus on the parts of the development process that I am able to show. The Art section includes selected early concept explorations that demonstrate my approach to visualising characters, gameplay systems and ideas during development." },
+          { label: "What I learned", title: "Documentation and change",
+            a: "Working on \"Bonehearts\" strengthened my experience with structured narrative documentation, interdisciplinary collaboration and adapting creative ideas throughout an evolving production.",
+            b: "One of the biggest lessons was learning to stay open to change. Both the Boneforge and Merchant features remained part of the game, but their final implementations evolved significantly from my original concepts. Seeing these ideas change through collaboration and production taught me that a design does not have to remain true to its original form to remain successful.",
+            c: "Instead, good design needs to be flexible enough to evolve with the needs of the game, the team and the production." }
+        ]
+      }
+    ],
+    narrativeTitle: "Short stories and sneak peaks",
+    excerptKicker: "Sample", excerptPending: "Sample coming soon — I'll add the excerpt here.",
+    readSample: "Read sample", hideSample: "Hide sample",
+    stories: [
+      { title: "A Tale of Mysterious Disappearances", genre: "Mystery · Suspense · Psychological Fiction", logline: "A woman settling into a new apartment complex notices that her neighbors are disappearing one by one. Each vanished resident leaves behind only a mysterious note, and those who remain seem to know more than they're willing to say.", hint: "Cover image" },
+      { title: "A Second Life", genre: "Fantasy · Transmigration · Dark Comedy", logline: "A woman wakes underwater in the body of a notorious villainess who was supposed to die after being thrown from a cliff. Surrounded by enemies and trapped in a life that isn't hers, she sees only one way out: pretend she has lost her memory and start over.", hint: "Cover image" },
+      { title: "Bittersweet Melancholy", genre: "Historical Fiction · War · Coming of Age", logline: "Ephraim lives a peaceful life with his family, hiding behind a quiet and emotionally distant exterior. But when invaders arrive on their shores, he is forced to fight for his home and protect the one person he would burn kingdoms for.", hint: "Cover image" }
+    ],
+    artTitle: "Art & Storyboards",
+    boneHints: ["Boneforge concept", "Blacksmith concept"],
+    mechShots: ["Dialogue flowchart", "Branch flowchart", "Walk cycle right", "Walk cycle left", "Picking up items", "Idle animation"],
+    ach: {
+      neighbour: { title: "Neighbour No. 12", text: "You read the note. The man in the hallway has closed his door for good." },
+      qa: { title: "QA Tester", text: "Good catch. That was intentional." },
+      speed: { title: "Speedrunner", text: "You didn't even read the tutorial." },
+      complete: { title: "Completionist", text: "Thanks for actually looking at everything." }
+    },
+    toast: {
+      kicker: "Achievement unlocked",
+      backTitle: "Achievements reset",
+      backText: "Everything is locked again and the neighbour is back."
+    },
+    artGroups: [
+      { title: "Rite of Red Snow", role: "Narrative Designer · Storyboard Artist", text: "For \"Rite of Red Snow\", I worked as both Narrative Designer and Storyboard Artist, developing the story, characters and worldbuilding for a 3D puzzle platformer set in a low-fantasy Stone Age world.", text2: "I created storyboards for key moments throughout Firi's journey, using them to explore how scenes, character actions and environments could communicate the story visually. The storyboards helped define the cinematic direction of the project and served as a visual foundation for developing important narrative moments.", text3: "Alongside the storyboards, I explored character-driven scenes and narrative concepts that connected Firi's personal journey with the world around her. This included moments of exploration, encounters with other characters and scenes that reveal elements of the world's history and mythology.", linkLabel: "Steam", href: "https://store.steampowered.com/app/4317830/Rite_of_Red_Snow/", hint: "Storyboard" },
+      { title: "Bonehearts concepts", role: "Narrative Designer · Game Designer", text: "Early visual and gameplay explorations for the Boneforge and Merchant systems.", text2: "The Boneforge was inspired by the classic board game \"Operation\", but reversed its core interaction. Instead of removing foreign objects from a body, players would collect bones and place them onto specific parts of the skeleton to strengthen them and unlock new abilities. I explored this idea through early sketches, mapping different body parts to gameplay functions such as light and heavy attacks, jumping and other upgrades.", text3: "The Merchant concept explored how a traditional shop interface could exist directly within the game world. Rather than separating the player from the setting through a conventional menu, I designed a skeletal merchant who acts as the interface himself. His moustache, hood and exaggerated skeleton design combine the dark fantasy setting with a more playful sense of humour.", text4: "Both concepts were early explorations of how gameplay systems could be communicated visually while remaining connected to the game's world, characters and overall tone.", linkLabel: "Steam", href: "https://store.steampowered.com/app/3806400/Bonehearts/", hint: "Concept art" },
+      { title: "Personal work", role: "Free exploration", text: "Outside of game development and professional projects, I use personal artwork to explore different styles, subjects and techniques. My work ranges from portrait and animal studies to character designs and stylized illustrations.", text2: "Working across different subjects and visual styles allows me to experiment without the constraints of a specific project or art direction. It also helps me develop my understanding of anatomy, shape, expression and visual storytelling while continuously expanding my artistic range.", text3: "These personal projects give me the freedom to follow ideas simply because I find them interesting, while also strengthening skills that I can bring back into my professional and game development work.", linkLabel: "", href: "", hint: "Artwork" }
+    ],
+    contactKicker: "Contact",
+    contactTitle: "Get in Touch!",
+    contactText: "I'm open to internships and junior roles in Game Design, Narrative Design and QA. Whether you want to talk about a project, a position or just connect, feel free to get in touch.",
+    contactText2: "I read and respond to every message.",
+    contacts: [
+      { label: "Email", value: "kizilaslan.a@live.de", href: "mailto:kizilaslan.a@live.de" },
+      { label: "LinkedIn", value: "Ahyana Kizilaslan", href: "https://www.linkedin.com/in/ahyanakizilaslan" },
+      { label: "Resume", value: "Open PDF", href: "uploads/Resume_Ahyana_Kizilaslan.pdf" }
+    ],
+    legalImpLink: "Legal notice", legalPrivLink: "Privacy policy",
+    imp: {
+      title: "Legal notice",
+      blocks: [
+        { h: "Information pursuant to § 5 DDG", p: "Ahyana Kizilaslan\nLeitenweg 14\n89312 Günzburg\nGermany" },
+        { h: "Contact", p: "Email: kizilaslan.a@live.de" },
+        { h: "Responsible for content pursuant to § 18 (2) MStV", p: "Ahyana Kizilaslan, address as above" },
+        { h: "Liability for content", p: "The content of this site was created with care. I cannot, however, guarantee that it is accurate, complete or up to date at all times." },
+        { h: "Liability for links", p: "This site links to external websites whose content I have no control over. The operators of those sites are solely responsible for their content." },
+        { h: "Copyright", p: "Unless stated otherwise, all texts, illustrations, storyboards and concept work shown here were created by me. Screenshots and materials from team projects belong to the respective studios and teams. Please ask before reusing anything." }
+      ]
+    },
+    priv: {
+      title: "Privacy policy",
+      blocks: [
+        { h: "Controller", p: "Ahyana Kizilaslan\nLeitenweg 14\n89312 Günzburg\nEmail: kizilaslan.a@live.de" },
+        { h: "Purpose of this site", p: "This website is a personal portfolio. There are no user accounts, no comment function and no analytics or tracking services. The typefaces are hosted on this server, so no data is sent to third parties when you view the site." },
+        { h: "Program libraries", p: "To display the site, your browser loads two standard program libraries (React and Babel) from the unpkg.com service. This transmits your IP address to that provider. The legal basis is Art. 6 (1) (f) GDPR (technical presentation of the site)." },
+        { h: "Server log files", p: "When you open the site, the hosting provider automatically records technical access data (IP address, date and time, requested file, browser and operating system). This data is required to operate the site securely (Art. 6 (1) (f) GDPR) and is not combined with other data." },
+        { h: "Local storage in your browser", p: "The site stores your chosen language, colour scheme and unlocked achievements in your browser's local storage. That data stays on your device, is never transmitted and can be deleted at any time in your browser settings. No cookies are set." },
+        { h: "Contacting me", p: "If you send me an email, I process your details solely in order to answer your enquiry (Art. 6 (1) (b) and (f) GDPR)." },
+        { h: "External links", p: "This site links to Steam, itch.io, Google Sites, mb21 and LinkedIn. Once you follow such a link, the privacy policy of that provider applies." },
+        { h: "Your rights", p: "You have the right to information, correction, deletion, restriction of processing, data portability and objection (Art. 15 to 21 GDPR). You may also lodge a complaint with a data protection authority. An email to the address above is enough." }
+      ]
+    },
+    toTop: "Back to top"
+  },
+  de: {
+    navAbout: "Über mich", navWhat: "Was ich mache", navWork: "Spiele", navNarrative: "Narrative", navArt: "Art", navContact: "Kontakt",
+    roles: "Game Design · Narrative Design · Quality Assurance",
+    heroA: "Hallo, ich bin", heroB: "Ahyana Kizilaslan",
+    ctaWork: "Projekte ansehen", ctaAbout: "Über mich",
+    available: "Studentin für Game Production & Management",
+    themeLabel: "Design wechseln",
+    ticker: ["Worldbuilding", "Quest Design", "Dialogschreiben", "Balancing", "Playtesting", "Charakterdesign", "Storyboards", "Kurzgeschichten", "QA"],
+    portraitTag: "Freut mich",
+    aboutTitle: "Über mich",
+    aboutP1: "Ich studiere Game Production & Management und begeistere mich für Game Design, Storytelling und Spielerlebnisse, die im Gedächtnis bleiben.",
+    aboutP2: "Am liebsten bringe ich Geschichten und Welten über Charaktere, Quests, Dialoge und Lore zum Leben. In Projekten wie Bonehearts und dem preisgekrönten Brettspiel Nexus konnte ich diese Bereiche im Team ausprobieren und unterschiedliche kreative Ideen zusammenbringen.",
+    aboutP3: "Meine QA-Erfahrung bei Kalypso Media hat mir gezeigt, Spiele aus Spielersicht zu betrachten und auf die Details zu achten, die ein Erlebnis tragen oder kippen lassen. Ob ich eine Geschichte schreibe, Gameplay entwerfe oder ein Feature teste: Ich suche nach Wegen, Spiele motivierender, runder und spielbarer zu machen.",
+    whatTitle: "Was ich mache",
+    doing: [
+      { num: "01", slot: "what-1", src: "uploads/what-1.webp", hint: "Gameplay-Screenshot", kicker: "Game Design", text: "Ich entwerfe Gameplay-Systeme und Mechaniken mit Fokus auf intuitive, motivierende und bedeutungsvolle Spielerlebnisse. Dazu gehören Konzeptentwicklung, Gameplay-Design, Balancing und die Verzahnung von Mechaniken mit der Spielwelt." },
+      { num: "02", slot: "what-2", src: "uploads/what-2.webp", hint: "Dialog- oder Questdokument", kicker: "Narrative Design", text: "Ich schreibe Geschichten, Charaktere, Dialoge, Quests, Lore und narrative Systeme, die Spielwelten zum Leben bringen. Mein Schwerpunkt liegt darauf, Narrative mit Gameplay und Environmental Storytelling zu verbinden, damit ein zusammenhängendes, immersives Erlebnis entsteht." },
+      { num: "03", slot: "what-3", src: "uploads/what-3.webp", hint: "Bugreport oder Testaufbau", kicker: "Quality Assurance", text: "Ich prüfe Spielbalance, Usability und das Spielerlebnis über die Testphasen hinweg. Dazu gehören das Finden, Reproduzieren und Dokumentieren von Bugs in Jira, die eigenständige Bearbeitung von Support-Anfragen und die Auswertung von Spielerfeedback, um wiederkehrende Probleme und Verbesserungsmöglichkeiten zu erkennen." }
+    ],
+    workTitle: "Ausgewählte Projekte",
+    awardKicker: "Ausgezeichnet",
+    openMore: "Ganze Case lesen", openLess: "Case schließen",
+    projects: [
+      {
+        title: "Tears and Dust", hasCat: true,
+        tags: "Narrative Design · Worldbuilding · Charakterdesign · Dialogschreiben",
+        lead: "Ein narratives Sci-Fi-Abenteuer über Moral und Wandel, für das ich an Charakteren, Dialogen, Worldbuilding und Story-Struktur gearbeitet habe.",
+        body: "Hunter ist ein abgebrühter Cyborg-Kopfgeldjäger, der auf einem abgelegenen Wüstenplaneten eine Gruppe Rebellen aufspüren soll. Die narrative Herausforderung war, sein distanziertes Weltbild schrittweise aufzubrechen — nicht durch eine einzelne Offenbarung, sondern durch die Siedler und Rebellen, die er unterwegs trifft.",
+        links: [{ label: "itch.io", href: "https://unboundhnu.itch.io/tears-and-dust" }, { label: "Mehr erfahren", href: "https://sites.google.com/view/roguephoenixstudio/unsere-games/tears-and-dust" }],
+        award: "\"Tears and Dust\" gewann einen Preis beim games.kickstarter an der Hochschule für angewandte Wissenschaften Neu-Ulm.",
+        hints: ["Das Coverbild", "Das Hauptmenü", "Die Spielmechaniken", "Der Saloon im Spiel", "Entwurf und Überarbeitung der Straße", "Der Shop im Detail", "Das heruntergekommene Haus im Detail", "Der Saloon im Detail", "Das Erdgeschoss des Saloons", "Das Obergeschoss des Saloons", "Eines der Mietzimmer im Saloon", "Die Werkstatt im Detail", "Das Innere der Werkstatt"],
+        tabs: [
+          { label: "Mein Beitrag", title: "Mein Ansatz",
+            a: "Gemeinsam mit einem weiteren Teammitglied habe ich die Atmosphäre der Welt mitgestaltet und mehrere der Charaktere entwickelt, denen Hunter auf seiner Reise begegnet. Diese NPCs sollten mehr sein als Quest-Geber — sie sollten Hunter einen Grund geben, sich für eine Gemeinschaft zu interessieren, nachdem er die meiste Zeit seines Lebens allein war.",
+            b: "Charaktere wie die Mechanikerin und der Barkeeper tragen dazu jeweils unterschiedlich bei. Die Mechanikerin hilft Hunter, seinen Sand-Speeder zu reparieren und seine Reise fortzusetzen. Der Barkeeper ist ein vergessener Veritas-Roboter, der ursprünglich zurückgelassen wurde, um Informationen zu sammeln. Nachdem ihn der Konzern aufgegeben hatte, lebte er einfach bei den Siedlern weiter und betrieb die Bar." },
+          { label: "Die Herausforderung", title: "Ein Weltbild aufbrechen",
+            a: "\"Tears and Dust\" folgt Hunter, einem abgebrühten Cyborg-Kopfgeldjäger, der für die Veritas Corporation arbeitet. Er wird auf einen abgelegenen Wüstenplaneten geschickt, um eine Gruppe Rebellen aufzuspüren. Obwohl er weiß, dass die Menschen, die er findet, wahrscheinlich getötet werden, hält Hunter sich die Folgen emotional vom Leib. Er redet sich ein, nicht verantwortlich zu sein, weil er selbst nie abdrückt.",
+            b: "Die narrative Herausforderung war, diese Denkweise schrittweise in Frage zu stellen. Hunters Sicht sollte sich nicht durch eine einzelne Offenbarung oder einen dramatischen Moment ändern. Stattdessen sollte seine Wandlung natürlich aus den Menschen wachsen, die er trifft, und aus den Erfahrungen, die er auf seiner Reise macht.",
+            c: "Indem wir ihn den Siedlern und Rebellen Begegnung für Begegnung näherbringen, konnten wir die Distanz langsam aufbrechen, die er zwischen sich und den Folgen seiner Arbeit aufgebaut hat." },
+          { label: "Unser Ansatz", title: "Hunters Wandlung strukturieren",
+            a: "Wir haben Hunters Wandlung über die Akte der Geschichte hinweg strukturiert, wobei jeder Akt sein Weltbild anders in Frage stellt. Zuerst führen ihn die Siedler in eine Gemeinschaft ein, die ihm mit unerwarteter Freundlichkeit begegnet. Später retten die Rebellen sein Leben, ohne etwas dafür zu verlangen. Das vergiftete Wasser zeigt dann, wie weit Veritas für seine Ziele geht, und zwingt Hunter, den Konzern zu hinterfragen, für den er arbeitet. Schließlich muss er sich bei der Zerstörung von Easthaven den Folgen seines eigenen Handelns und seiner Mitschuld stellen.",
+            b: "Diese Abfolge sollte Hunters Veränderung allmählich statt plötzlich wirken lassen. Statt dem Spieler einfach zu erzählen, dass sich sein Weltbild ändert, lassen wir jede Begegnung ein Stück seiner emotionalen Distanz abtragen.",
+            c: "Gleichzeitig lernt der Spieler die Menschen von Easthaven gemeinsam mit Hunter kennen. Was zunächst wie eine einfache Siedlung wirkt, wird allmählich zu einer Gemeinschaft mit Charakteren, mit denen der Spieler Zeit verbracht hat und die ihm etwas bedeuten. Dadurch wird die Zerstörung von Easthaven für Hunter und den Spieler zu einem persönlichen Verlust und nicht bloß zu einem weiteren Plotpunkt." },
+          { label: "Wettbewerbe", title: "games.kickstarter", shots: ["Urkunde"],
+            a: "\"Tears and Dust\" wurde bei der Semesterabschluss-Präsentation unserer Hochschule als bestes Spiel des Semesters ausgezeichnet, wobei die Projekte von einer externen Jury bewertet wurden.",
+            b: "Im Anschluss an die Auszeichnung erhielt das Projekt außerdem eine Entwicklungsförderung von 7.000 € vom Bayerischen Staatsministerium für Unterricht und Kultus.",
+            c: "Die Urkunde zur Auszeichnung ist hier zu sehen ->" },
+          { label: "Charakterdesign", title: "Die Mechanikerin", mech: true, shots: [],
+            a: "Die Mechanikerin ist eine der ersten Siedlerinnen, die Hunter auf seiner Reise trifft. Ihre Rolle ist es, die Siedlung wie eine echte Gemeinschaft wirken zu lassen, die aktiv mit Hunter umgeht, statt ihm nur Ziele zu geben. Ihre selbstbewusste und schlagfertige Art bildet außerdem einen Kontrast zu Hunters härterem und zurückhaltenderem Wesen.",
+            b: "Ihr visuelles Design sollte ihren Beruf sofort erzählen. Ich habe ihr zusätzliche Roboterarme gegeben, um eine markante Silhouette zu schaffen und ihre Rolle als geschickte Mechanikerin zu unterstreichen. Die zusätzlichen Arme lassen sie Werkzeuge und Reparaturen effizienter handhaben und wirken schnell, fähig und in ihrer Werkstatt völlig zu Hause.",
+            c: "Die Dialoge der Mechanikerin habe ich am Spielfortschritt ausgerichtet, statt sie dasselbe Gespräch wiederholen zu lassen. Ihre Begrüßung ändert sich, je nachdem ob der Spieler ihr zum ersten Mal begegnet, der Sand-Speeder noch repariert wird oder die Aufgabe schon erledigt ist. Von einem zentralen Dialog-Hub aus kann der Spieler einzelne Reparaturprobleme ansprechen und kontextbezogene Hinweise erhalten. Die Dialoge geben genug Informationen, damit der Spieler versteht, worauf er achten muss, verraten die Lösung aber bewusst nicht. Das eigentliche Rätsel verlangt weiterhin, die Umgebung zu erkunden und die nötigen Teile selbst zu finden." }
+        ]
+      },
+      {
+        title: "Nexus",
+        tags: "Kernmechaniken · Card Balancing · Visuelle Leitung · Regelwerk",
+        lead: "Ein preisgekröntes Lernspiel, das physisches und digitales Spiel verbindet. Ich habe an Spielmechaniken, Balancing, visueller Gestaltung und Produktion gearbeitet.",
+        body: "Entwickelt für den Chemieunterricht, um Redoxreaktionen zu üben. Nachdem erste Prototypen zu komplex waren, haben wir die Lernziele auf zwei Formate verteilt: ein analoges Kartenspiel für Oxidationszahlen und ein digitales Spiel für den Elektronenübergang.",
+        links: [{ label: "Webversion spielen", href: "https://roguephoenixstudio.itch.io/nexus" }, { label: "Mehr erfahren", href: "https://sites.google.com/view/roguephoenixstudio/unsere-games/nexus" }, { label: "Laudatio mb21", href: "https://www.mb21.de/wettbewerbsjahr_2023.html?articles=nexus" }],
+        hints: ["Nexus in der Ausstellung beim mb21", "Nexus ausgepackt", "Spielbrett mit Karten und Anleitung", "Das Hauptmenü der App", "Ein Ingame-Screenshot der App", "Elementkarten, Trumpfkarten, Spielbrett und Aufgabenkarten mit Lösungen"],
+        awards: [
+          "2023 gewann \"Nexus\" eine Auszeichnung beim Deutschen Multimediapreis mb21.",
+          "Außerdem wurde das Spiel beim games.kickstarter-Wettbewerb an unserer Hochschule ausgezeichnet.",
+          "Über mint21 erhielt das Projekt gemeinsam mit der Realschule Herrsching am Ammersee eine weitere Auszeichnung. Das Spiel wird an der Schule heute als Lernspiel eingesetzt."
+        ],
+        tabs: [
+          { label: "Mein Beitrag", title: "Woran ich gearbeitet habe",
+            a: "Ich habe an der Entwicklung und Verfeinerung der Kernmechaniken mitgewirkt, mit besonderem Fokus auf Card Balancing und die Vereinfachung des gesamten Spielerlebnisses. Außerdem habe ich an der visuellen Leitung, am Regelwerk und an der digitalen Umsetzung des Spiels gearbeitet.",
+            b: "Das Balancing bedeutete, verschiedene Kartenverteilungen immer wieder im echten Spiel zu testen. Ich habe geprüft, wie oft Spieler mit einer unspielbaren Hand zurückblieben, wie viel Bluff eine Runde tragen konnte, bevor das Spiel ins Stocken geriet, und wie lange eine komplette Partie innerhalb der begrenzten Zeit einer Schulstunde dauerte.",
+            c: "Diese Tests haben uns geholfen, unnötige Komplexität zu erkennen und die Mechaniken entsprechend anzupassen. Das Ziel war, das Kern-Gameplay motivierend zu halten und gleichzeitig die Regeln einfach genug für neue Spieler und das Spiel kurz genug für den Unterricht zu machen." },
+          { label: "Die Herausforderung", title: "Drei Denkschritte gleichzeitig", shots: [],
+            a: "\"Nexus\" wurde als Lernspiel für den Chemieunterricht entwickelt, um Redoxreaktionen interaktiver und motivierender zu üben als mit klassischen Arbeitsblättern.",
+            b: "Eine Redoxreaktion verlangt von Schülern mehrere Denkschritte: Oxidationszahlen bestimmen, Elektronen ausgleichen und die entstehenden Stoffe bestimmen. Unser erster Ansatz versuchte, alle drei Lernziele in einem Spiel zu vereinen. Das deckte zwar den gesamten Prozess ab, brachte aber auch zu viel Komplexität mit und überforderte die Spieler schnell.",
+            c: "Die Herausforderung war daher, den Lernwert des Spiels zu erhalten, ohne das Kern-Gameplay unnötig kompliziert zu machen. Wir mussten einen Weg finden, den Lernprozess in überschaubare Schritte zu zerlegen und das Spiel dabei motivierend und leicht verständlich zu halten." },
+          { label: "Unser Ansatz", title: "Ein Lernziel pro Medium", shots: ["Kartenspiel", "Wie das Kartenspiel funktioniert", "Spielablauf: Die Karten werden so gelegt, dass FeO gebildet wird", "Wird FeO erfolgreich gelegt, darf man die Elementkarten in den eigenen Punktestapel aufnehmen", "Das Hauptmenü des digitalen Spiels", "Wie das digitale Spiel funktioniert"],
+            a: "Wir haben den Redoxprozess in kleinere Interaktionen zerlegt und jedes Lernziel dem Medium zugewiesen, das es am wirkungsvollsten vermitteln kann. Statt Elemente, Ionen, Elektronen und Verbindungen als abstrakte Konzepte auf Papier zu behandeln, haben wir sie zu physischen und digitalen Objekten gemacht, die Spieler direkt bewegen können.",
+            b: "Das analoge Kartenspiel konzentriert sich darauf, Oxidationszahlen zu bestimmen und Verbindungen in ihre einzelnen Ionen zu zerlegen. Das digitale Spiel übernimmt dort, wo physische Karten weniger wirksam sind, und visualisiert Elektronenübergang und die Bildung der Reaktionsprodukte über Interaktion und Animation.",
+            c: "Im analogen Spiel erhalten Spieler drei Karten und wetteifern darum, die Lücken auf einem gemeinsamen Aufgabenbrett zu füllen. Karten müssen nicht zwingend korrekt sein. Spieler können bewusst falsche Karten legen und andere so zwingen, die aktuelle Lösung zu bewerten. Damit wird das Bestimmen der richtigen Oxidationszahlen gleichzeitig zur Chemieaufgabe und zur Social-Deduction-Mechanik.",
+            d: "Das digitale Spiel geht die unsichtbaren Teile der Reaktion direkter an. Spieler schütteln Elementkarten, um Elektronen freizusetzen, die über den Bildschirm fliegen und auf die richtigen Ionen gezogen werden müssen. Indem der Elektronenübergang zu einer sichtbaren, körperlichen Interaktion wird, lässt sich ein sonst abstrakter Prozess leichter verstehen und behalten." },
+          { label: "Zahlen & Fakten", title: "Passend für eine Schulstunde",
+            a: "3 Lernziele -> Oxidationszahlen, Elektronenübergang und Reaktionsprodukte.",
+            b: "25-30 Minuten Spielzeit, ausgelegt auf eine 45-minütige Schulstunde.",
+            c: "2 Formate -> ein analoges Mehrspieler-Kartenspiel und ein digitales Einzelspielerspiel.",
+            d: "Derzeit an der Realschule Herrsching am Ammersee als Lernspiel für den Chemieunterricht im Einsatz." },
+          { label: "Wettbewerbe", title: "Preise und Wettbewerbe", shots: ["Urkunde mb21", "Urkunde games.kickstarter", "Urkunde mint21"],
+            a: "\"Nexus\" hat im Laufe seiner Entwicklung mehrere Auszeichnungen und Anerkennungen erhalten. 2023 wurde das Projekt beim Deutschen Multimediapreis mb21 ausgezeichnet und gewann außerdem einen Preis beim games.kickstarter-Wettbewerb an unserer Hochschule.",
+            b: "Gemeinsam mit der Realschule Herrsching am Ammersee erhielt das Projekt eine weitere Anerkennung bei mint21.",
+            c: "Bilder und Urkunden sind hier zu sehen ->" },
+          { label: "Was ich gelernt habe", title: "Wann man vereinfacht",
+            a: "\"Nexus\" hat mir gezeigt, dass mehr Mechaniken nicht zwangsläufig ein besseres Spiel ergeben. Manchmal führt es zu einem viel stärkeren Design, Features zu streichen und jedem verbleibenden System eine klare Aufgabe zu geben.",
+            b: "Die größte Lektion war für mich, zwischen zusätzlicher Komplexität und zusätzlicher sinnvoller Interaktion zu unterscheiden. Spieler nur das richtige Ion legen zu lassen hätte ein Arbeitsblatt in ein Kartenspiel verwandelt. Mit Bluff, Risiko und Unsicherheit haben wir den Spielern einen Grund gegeben, miteinander zu interagieren, statt nur die richtige Antwort zu finden.",
+            c: "Das hat mir gezeigt, dass Lernspiele für ihre Lernziele kein gutes Game Design opfern müssen. Die Mechaniken können das Lernen unterstützen und den Spielern trotzdem sinnvolle Entscheidungen geben." }
+        ]
+      },
+      {
+        title: "Bonehearts",
+        tags: "Narrative Design · Quest Design · Worldbuilding · Game Design",
+        lead: "Ein unveröffentlichtes Action-Adventure, in dem ich an Narrative und Game Design gearbeitet habe: Worldbuilding, Quests, Gameplay und Leveldesign.",
+        body: "Ich habe an Story-Entwicklung, Worldbuilding, Charakteren, Quests und Dialogen mitgewirkt und die narrative Dokumentation über Disziplinen hinweg gepflegt.",
+        links: [{ label: "Steam", href: "https://store.steampowered.com/app/3806400/Bonehearts/" }, { label: "itch.io", href: "https://deus-draconis-interactive.itch.io/bonehearts" }],
+        hints: ["Key Art", "Gameplay", "Gameplay", "Gameplay", "Gameplay"],
+        tabs: [
+          { label: "Mein Beitrag", title: "Narrative und Game Designerin",
+            a: "Ich habe an der Entwicklung von Story, Worldbuilding, Charakteren, Quests und Dialogen mitgewirkt. Außerdem habe ich die narrative Dokumentation des Projekts erstellt und gepflegt und damit eine konsistente Grundlage für Story und Setting geschaffen.",
+            b: "Da das Narrative mit dem gesamten Spielerlebnis zusammenpassen musste, habe ich eng mit anderen Disziplinen zusammengearbeitet, um Story, Charaktere und Gameplay aufeinander abzustimmen. Dazu gehörte, wie narrative Elemente das Gameplay stützen können und wie Gameplay-Systeme die Welt und ihre Charaktere verstärken.",
+            c: "Über das Schreiben hinaus habe ich Gameplay-Systeme auch visuell erkundet, darunter ein frühes Konzept für ein Charakter-Upgrade-System und ein Händler-Interface in der Spielwelt, um zu untersuchen, wie sich diese Systeme natürlich in die Welt einfügen können." },
+          { label: "Die Herausforderung", title: "Unter NDA",
+            a: "\"Bonehearts\" ist bislang unveröffentlicht und unterliegt einem NDA. Konkrete Story-Inhalte, Entwicklungsmaterialien und andere interne Assets können daher zum jetzigen Zeitpunkt nicht öffentlich geteilt werden.",
+            b: "Statt das Projekt über seine finalen Inhalte zu zeigen, konzentriere ich mich hier auf die Teile des Entwicklungsprozesses, die ich zeigen darf. Der Art-Bereich enthält ausgewählte frühe Konzeptentwürfe, die meinen Zugang zum Visualisieren von Charakteren, Gameplay-Systemen und Ideen während der Entwicklung zeigen." },
+          { label: "Was ich gelernt habe", title: "Dokumentation und Wandel",
+            a: "Die Arbeit an \"Bonehearts\" hat meine Erfahrung mit strukturierter narrativer Dokumentation, interdisziplinärer Zusammenarbeit und dem Anpassen kreativer Ideen in einer sich entwickelnden Produktion gestärkt.",
+            b: "Eine der größten Lektionen war, offen für Veränderung zu bleiben. Boneforge und Händler blieben beide Teil des Spiels, ihre endgültige Umsetzung entwickelte sich aber deutlich von meinen ursprünglichen Konzepten weg. Zu sehen, wie sich diese Ideen durch Zusammenarbeit und Produktion verändern, hat mir gezeigt, dass ein Design seiner ursprünglichen Form nicht treu bleiben muss, um erfolgreich zu sein.",
+            c: "Gutes Design muss stattdessen flexibel genug sein, um mit den Anforderungen des Spiels, des Teams und der Produktion mitzuwachsen." }
+        ]
+      }
+    ],
+    narrativeTitle: "Kurzgeschichten und Sneak Peaks",
+    excerptKicker: "Leseprobe", excerptPending: "Leseprobe folgt — hier trage ich den Textauszug nach.",
+    readSample: "Leseprobe lesen", hideSample: "Leseprobe schließen",
+    stories: [
+      { title: "A Tale of Mysterious Disappearances", genre: "Mystery · Suspense · Psychological Fiction", logline: "Eine Frau zieht in einen neuen Wohnkomplex und merkt, dass ihre Nachbarn einer nach dem anderen verschwinden. Jeder Verschwundene lässt nur eine rätselhafte Notiz zurück, und die Verbliebenen scheinen mehr zu wissen, als sie sagen wollen.", hint: "Titelbild" },
+      { title: "A Second Life", genre: "Fantasy · Transmigration · Dark Comedy", logline: "Eine Frau erwacht unter Wasser im Körper einer berüchtigten Antagonistin, die eigentlich nach einem Sturz von der Klippe sterben sollte. Umgeben von Feinden und gefangen in einem fremden Leben sieht sie nur einen Ausweg: vorzugeben, ihr Gedächtnis verloren zu haben, und neu anzufangen.", hint: "Titelbild" },
+      { title: "Bittersweet Melancholy", genre: "Historical Fiction · War · Coming of Age", logline: "Ephraim lebt ein friedliches Leben mit seiner Familie und verbirgt sich hinter einer stillen, emotional distanzierten Fassade. Doch als Angreifer an ihren Küsten landen, muss er für seine Heimat kämpfen und die eine Person schützen, für die er Königreiche niederbrennen würde.", hint: "Titelbild" }
+    ],
+    artTitle: "Art & Storyboards",
+    boneHints: ["Boneforge Konzept", "Blacksmith-Konzept"],
+    mechShots: ["Dialog-Flowchart", "Branch-Flowchart", "Walk Cycle rechts", "Walk Cycle links", "Gegenstände aufnehmen", "Idle-Animation"],
+    ach: {
+      neighbour: { title: "Nachbar Nr. 12", text: "Du hast den Zettel gelesen. Der Mann im Flur hat seine Tür endgültig geschlossen." },
+      qa: { title: "QA Tester", text: "Gut aufgepasst. Der war Absicht." },
+      speed: { title: "Speedrunner", text: "Du hast nicht mal das Tutorial gelesen." },
+      complete: { title: "Completionist", text: "Danke, dass du dir wirklich alles angesehen hast." }
+    },
+    toast: {
+      kicker: "Erfolg freigeschaltet",
+      backTitle: "Achievements zurückgesetzt",
+      backText: "Alles ist wieder gesperrt und der Nachbar ist zurück."
+    },
+    artGroups: [
+      { title: "Rite of Red Snow", role: "Narrative Designerin · Storyboard-Artist", text: "Für \"Rite of Red Snow\" habe ich als Narrative Designerin und Storyboard-Artist gearbeitet und Story, Charaktere und Worldbuilding für einen 3D-Puzzle-Platformer in einer Low-Fantasy-Steinzeitwelt entwickelt.", text2: "Ich habe Storyboards für Schlüsselmomente auf Firis Reise erstellt und damit untersucht, wie Szenen, Handlungen der Charaktere und Umgebungen die Geschichte visuell erzählen können. Die Storyboards haben die filmische Ausrichtung des Projekts geprägt und dienten als visuelle Grundlage für die Entwicklung wichtiger narrativer Momente.", text3: "Neben den Storyboards habe ich charaktergetriebene Szenen und narrative Konzepte erkundet, die Firis persönliche Reise mit der Welt um sie herum verbinden. Dazu gehörten Momente des Erkundens, Begegnungen mit anderen Charakteren und Szenen, die Teile der Geschichte und Mythologie der Welt offenlegen.", linkLabel: "Steam", href: "https://store.steampowered.com/app/4317830/Rite_of_Red_Snow/", hint: "Storyboard" },
+      { title: "Bonehearts-Konzepte", role: "Narrative Designerin · Game Designerin", text: "Frühe visuelle und spielerische Entwürfe für die Boneforge- und Händler-Systeme.", text2: "Die Boneforge war vom klassischen Brettspiel \"Doktor Bibber\" inspiriert, drehte dessen Kerninteraktion aber um. Statt Fremdkörper aus einem Körper zu entfernen, sammeln Spieler Knochen und setzen sie auf bestimmte Stellen des Skeletts, um sie zu stärken und neue Fähigkeiten freizuschalten. Diese Idee habe ich in frühen Skizzen erkundet und einzelne Körperteile Gameplay-Funktionen wie leichten und schweren Angriffen, Sprüngen und weiteren Upgrades zugeordnet.", text3: "Das Händler-Konzept untersuchte, wie ein klassisches Shop-Interface direkt in der Spielwelt existieren kann. Statt den Spieler über ein herkömmliches Menü vom Setting zu trennen, habe ich einen knöchernen Händler entworfen, der selbst das Interface ist. Sein Schnurrbart, die Kapuze und das überzeichnete Skelettdesign verbinden das Dark-Fantasy-Setting mit einem verspielteren Humor.", text4: "Beide Konzepte waren frühe Erkundungen, wie Gameplay-Systeme visuell erzählt werden können und dabei mit Welt, Charakteren und Grundton des Spiels verbunden bleiben.", linkLabel: "Steam", href: "https://store.steampowered.com/app/3806400/Bonehearts/", hint: "Konzeptart" },
+      { title: "Persönliche Arbeiten", role: "Freies Experimentieren", text: "Außerhalb von Spieleentwicklung und beruflichen Projekten erkunde ich in eigenen Arbeiten verschiedene Stile, Motive und Techniken. Die Bandbreite reicht von Porträt- und Tierstudien bis zu Charakterdesigns und stilisierten Illustrationen.", text2: "Über verschiedene Motive und visuelle Stile hinweg zu arbeiten erlaubt mir zu experimentieren, ohne an ein bestimmtes Projekt oder eine Art Direction gebunden zu sein. Es hilft mir außerdem, mein Verständnis von Anatomie, Form, Ausdruck und visuellem Erzählen zu entwickeln und meine künstlerische Bandbreite kontinuierlich zu erweitern.", text3: "Diese persönlichen Projekte geben mir die Freiheit, Ideen einfach deshalb zu verfolgen, weil ich sie interessant finde, und stärken gleichzeitig Fähigkeiten, die ich in meine beruflichen und spielebezogenen Arbeiten zurücktragen kann.", linkLabel: "", href: "", hint: "Artwork" }
+    ],
+    contactKicker: "Kontakt",
+    contactTitle: "Kontakt aufnehmen!",
+    contactText: "Ich bin offen für Praktika und Junior-Positionen in Game Design, Narrative Design und QA. Ob du über ein Projekt, eine Stelle oder einfach so sprechen möchtest: Melde dich gern.",
+    contactText2: "Ich lese und beantworte jede Nachricht.",
+    contacts: [
+      { label: "E-Mail", value: "kizilaslan.a@live.de", href: "mailto:kizilaslan.a@live.de" },
+      { label: "LinkedIn", value: "Ahyana Kizilaslan", href: "https://www.linkedin.com/in/ahyanakizilaslan" },
+      { label: "Lebenslauf", value: "PDF öffnen", href: "uploads/Resume_Ahyana_Kizilaslan.pdf" }
+    ],
+    legalImpLink: "Impressum", legalPrivLink: "Datenschutzerklärung",
+    imp: {
+      title: "Impressum",
+      blocks: [
+        { h: "Angaben gemäß § 5 DDG", p: "Ahyana Kizilaslan\nLeitenweg 14\n89312 Günzburg\nDeutschland" },
+        { h: "Kontakt", p: "E-Mail: kizilaslan.a@live.de" },
+        { h: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV", p: "Ahyana Kizilaslan, Adresse wie oben" },
+        { h: "Haftung für Inhalte", p: "Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für ihre Richtigkeit, Vollständigkeit und Aktualität kann ich jedoch keine Gewähr übernehmen." },
+        { h: "Haftung für Links", p: "Diese Seite verlinkt auf externe Websites, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich." },
+        { h: "Urheberrecht", p: "Alle hier gezeigten Texte, Illustrationen, Storyboards und Konzeptarbeiten stammen, sofern nicht anders angegeben, von mir. Screenshots und Materialien aus Teamprojekten liegen bei den jeweiligen Studios und Teams. Eine Verwendung bitte nur nach Rücksprache." }
+      ]
+    },
+    priv: {
+      title: "Datenschutzerklärung",
+      blocks: [
+        { h: "Verantwortliche", p: "Ahyana Kizilaslan\nLeitenweg 14\n89312 Günzburg\nE-Mail: kizilaslan.a@live.de" },
+        { h: "Zweck dieser Seite", p: "Diese Website ist ein persönliches Portfolio. Es gibt keine Nutzerkonten, keine Kommentarfunktion und keine Analyse- oder Tracking-Dienste. Die Schriftarten liegen auf diesem Server, beim Aufruf werden also keine Daten an Dritte übertragen." },
+        { h: "Programmbibliotheken", p: "Zur Darstellung der Seite lädt dein Browser zwei gängige Programmbibliotheken (React und Babel) vom Dienst unpkg.com. Dabei wird deine IP-Adresse an diesen Anbieter übertragen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (technische Darstellung der Seite)." },
+        { h: "Server-Logfiles", p: "Beim Aufruf der Seite erhebt der Hosting-Anbieter automatisch technische Zugriffsdaten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browser und Betriebssystem). Diese Daten sind für den sicheren Betrieb der Seite erforderlich (Art. 6 Abs. 1 lit. f DSGVO) und werden nicht mit anderen Daten zusammengeführt." },
+        { h: "Lokale Speicherung im Browser", p: "Die Seite speichert im Local Storage deines Browsers die gewählte Sprache, das Farbschema und freigeschaltete Achievements. Diese Daten bleiben auf deinem Gerät, werden nicht übertragen und können jederzeit über die Browsereinstellungen gelöscht werden. Cookies werden nicht gesetzt." },
+        { h: "Kontaktaufnahme", p: "Wenn du mir eine E-Mail schreibst, verarbeite ich deine Angaben ausschließlich zur Beantwortung deiner Anfrage (Art. 6 Abs. 1 lit. b und f DSGVO)." },
+        { h: "Externe Links", p: "Die Seite verlinkt auf Steam, itch.io, Google Sites, mb21 und LinkedIn. Beim Anklicken gelten die Datenschutzbestimmungen der jeweiligen Anbieter." },
+        { h: "Deine Rechte", p: "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde beschweren. Für Anfragen genügt eine E-Mail an die oben genannte Adresse." }
+      ]
+    },
+    toTop: "Nach oben"
+  }
+};
+
+const SPANS = [2, 1, 1, 2, 1, 2, 1, 1];
+
+class Component extends DCLogic {
+  state = { lang: "de", dark: true, gal: [0, 0, 0], open: [false, false, false], tab: [0, 0, 0], story: [false, false, false], npcGone: false, toast: null, unlocked: [], legal: null };
+  prog = { cases: {}, samples: {}, tabs: {}, bottom: false };
+
+  constructor(props) {
+    super(props);
+    this.glowRef = React.createRef();
+    this.ringRef = React.createRef();
+    this.lightboxImgRef = React.createRef();
+    this.heroRef = React.createRef();
+    this.portraitRef = React.createRef();
+    this.pos = { x: -400, y: -400, rx: -400, ry: -400 };
+  }
+
+  componentDidUpdate() {
+    const el = this.lightboxImgRef.current;
+    const cur = (this.state.zoomList || [])[this.state.zoomIndex || 0];
+    if (el && cur && el.getAttribute("src") !== cur) el.setAttribute("src", cur);
+    this.applyTextEdits();
+    this.syncEditables();
+  }
+
+  // ---- editable copy -------------------------------------------------
+  // Stable siblings: transient chrome (the edit bar) must not shift indices.
+  stableKids(p) {
+    return [...p.children].filter((c) => !c.hasAttribute("data-noedit"));
+  }
+
+  textKey(el) {
+    const parts = [];
+    let n = el;
+    while (n && n !== document.body && n.parentElement && !n.id) {
+      const p = n.parentElement;
+      parts.unshift(n.tagName + this.stableKids(p).indexOf(n));
+      n = p;
+    }
+    const root = n && n.id ? "#" + n.id : "body";
+    return root + "|" + parts.join(">");
+  }
+
+  nodeForKey(key) {
+    const [root, rest] = key.split("|");
+    let n = root && root[0] === "#" ? document.getElementById(root.slice(1)) : document.body;
+    if (!n) return null;
+    if (!rest) return n;
+    for (const part of rest.split(">")) {
+      const m = /^([A-Z0-9-]+)(\d+)$/.exec(part);
+      if (!m || !n) return null;
+      const c = this.stableKids(n)[Number(m[2])];
+      if (!c || c.tagName !== m[1]) return null;
+      n = c;
+    }
+    return n;
+  }
+
+  textNodes() {
+    const sel = "h1,h2,h3,h4,p,li,blockquote,span,a,button";
+    return [...document.querySelectorAll(sel)].filter((el) => {
+      if (el.closest("[data-noedit]")) return false;
+      if (!el.textContent.trim()) return false;
+      return [...el.children].every((c) => c.tagName === "BR");
+    });
+  }
+
+  loadTexts() {
+    if (!this.texts) {
+      try { this.texts = JSON.parse(localStorage.getItem("ak-portfolio-texts") || "{}") || {}; }
+      catch (e) { this.texts = {}; }
+    }
+    return this.texts;
+  }
+
+  applyTextEdits() {
+    const map = (this.loadTexts()[this.state.lang] || {});
+    for (const key of Object.keys(map)) {
+      const el = this.nodeForKey(key);
+      if (el && el.textContent !== map[key]) el.textContent = map[key];
+    }
+  }
+
+  syncEditables() {
+    const on = !!this.state.editMode;
+    if (!on && !this.editableWasOn) return;
+    this.editableWasOn = on;
+    for (const el of this.textNodes()) {
+      if (on) {
+        el.setAttribute("contenteditable", "plaintext-only");
+        el.setAttribute("spellcheck", "false");
+        el.style.outline = "1px dashed color-mix(in oklch, var(--accent) 60%, transparent)";
+        el.style.outlineOffset = "3px";
+        el.style.borderRadius = "2px";
+      } else {
+        el.removeAttribute("contenteditable");
+        el.style.outline = "";
+        el.style.outlineOffset = "";
+      }
+    }
+  }
+
+  onEditInput(e) {
+    if (!this.state.editMode) return;
+    const el = e.target;
+    if (!el || !el.getAttribute || !el.getAttribute("contenteditable")) return;
+    const store = this.loadTexts();
+    const lang = this.state.lang;
+    store[lang] = store[lang] || {};
+    store[lang][this.textKey(el)] = el.textContent;
+    clearTimeout(this._textSaveT);
+    this._textSaveT = setTimeout(() => this.saveTexts(), 600);
+  }
+
+  saveTexts() {
+    try { localStorage.setItem("ak-portfolio-texts", JSON.stringify(this.loadTexts())); } catch (e) {}
+  }
+
+  resetTexts() {
+    this.texts = {};
+    try { localStorage.removeItem("ak-portfolio-texts"); } catch (e) {}
+    location.reload();
+  }
+
+  slotSrc(slot) {
+    try {
+      const img = slot.shadowRoot && slot.shadowRoot.querySelector(".frame img");
+      return img && img.getAttribute("src") ? img.src : "";
+    } catch (e) { return ""; }
+  }
+
+  zoomableSrc(node) {
+    if (node.tagName === "IMAGE-SLOT") return this.slotSrc(node);
+    const bg = node.getAttribute("data-zoom-src");
+    if (bg) return bg;
+    return node.getAttribute("data-zoom") ? node.src : "";
+  }
+
+  openZoomFrom(node) {
+    const src = this.zoomableSrc(node);
+    if (!src) return;
+    // Only images inside the same [data-gallery] group are browsable together.
+    const scope = node.closest("[data-gallery]");
+    if (!scope) { this.setState({ zoomList: [src], zoomIndex: 0 }); return; }
+    const nodes = [...scope.querySelectorAll("img[data-zoom]:not([data-no-zoom]), [data-zoom-src]:not([data-no-zoom]), image-slot:not([data-no-zoom])")]
+      .map((n) => ({ n, src: this.zoomableSrc(n) }))
+      .filter((x) => x.src);
+    const idx = Math.max(0, nodes.findIndex((x) => x.n === node));
+    this.setState({ zoomList: nodes.length ? nodes.map((x) => x.src) : [src], zoomIndex: nodes.length ? idx : 0 });
+  }
+
+  stepZoom(dir) {
+    const list = this.state.zoomList || [];
+    if (!list.length) return;
+    this.setState((s) => ({ zoomIndex: (s.zoomIndex + dir + list.length) % list.length }));
+  }
+
+  componentDidMount() {
+    try {
+      const s = JSON.parse(localStorage.getItem("ak-portfolio-prefs") || "null");
+      if (s && (s.lang || typeof s.dark === "boolean")) {
+        this.setState({ lang: s.lang || this.state.lang, dark: typeof s.dark === "boolean" ? s.dark : this.state.dark });
+      }
+    } catch (e) {}
+    try {
+      if (localStorage.getItem("ak-portfolio-npc") === "gone") this.setState({ npcGone: true });
+    } catch (e) {}
+    this.applyTheme(this.state.dark);
+    this.applyLang(this.state.lang);
+
+    try {
+      const saved = JSON.parse(localStorage.getItem("ak-portfolio-ach") || "[]");
+      if (Array.isArray(saved)) this.setState({ unlocked: saved });
+    } catch (e) {}
+    this.arrivedAt = Date.now();
+    this.onScrollAch = () => {
+      const nar = document.getElementById("narrative");
+      if (nar && Date.now() - this.arrivedAt < 5000 && nar.getBoundingClientRect().top < window.innerHeight * 0.7) this.unlock("speed");
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 90) {
+        this.prog.bottom = true;
+        this.checkComplete();
+      }
+    };
+    window.addEventListener("scroll", this.onScrollAch, { passive: true });
+    this.onTextInput = (e) => this.onEditInput(e);
+    document.addEventListener("input", this.onTextInput, true);
+    this.slotGuard = (e) => {
+      const t = e.target;
+      const el = t && t.closest ? t.closest("image-slot") : null;
+      if (!el) return;
+      if (e.type === "click" && this.slotSrc(el)) return;
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    ["dragenter", "dragover", "dragleave", "drop", "click", "dblclick"].forEach((tp) =>
+      document.addEventListener(tp, this.slotGuard, true)
+    );
+    this.onEditGuard = (e) => {
+      if (!this.state.editMode) return;
+      const a = e.target && e.target.closest && e.target.closest("a[href]");
+      if (a) e.preventDefault();
+    };
+    document.addEventListener("click", this.onEditGuard, true);
+    this.onMove = (e) => {
+      this.pos.x = e.clientX; this.pos.y = e.clientY;
+      if (this.glowRef.current) this.glowRef.current.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`;
+      const w = window.innerWidth, h = window.innerHeight;
+      const dx = (e.clientX / w - 0.5), dy = (e.clientY / h - 0.5);
+      if (this.heroRef.current) this.heroRef.current.style.transform = `translate3d(${dx * -18}px,${dy * -10}px,0)`;
+      if (this.portraitRef.current) this.portraitRef.current.style.transform = `perspective(900px) rotateY(${dx * 6}deg) rotateX(${dy * -6}deg)`;
+    };
+    window.addEventListener("mousemove", this.onMove, { passive: true });
+    const tick = () => {
+      this.pos.rx += (this.pos.x - this.pos.rx) * 0.16;
+      this.pos.ry += (this.pos.y - this.pos.ry) * 0.16;
+      if (this.ringRef.current) this.ringRef.current.style.transform = `translate3d(${this.pos.rx}px,${this.pos.ry}px,0)`;
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+
+    this.onDocClick = (e) => {
+      if (this.state.editMode) return;
+      if (this.state.zoomList) return;
+      const path = e.composedPath ? e.composedPath() : [e.target];
+      for (const el of path) {
+        if (!el || !el.tagName) continue;
+        if (this.draggedAt && Date.now() - this.draggedAt < 250) return;
+        if (el.getAttribute("data-no-zoom")) return;
+        if (el.tagName === "IMAGE-SLOT" || el.getAttribute("data-zoom-src") || (el.tagName === "IMG" && el.getAttribute("data-zoom"))) {
+          if (el.tagName === "IMAGE-SLOT" && !this.slotSrc(el)) return;
+          e.preventDefault();
+          this.openZoomFrom(el);
+          return;
+        }
+        if (el.tagName === "A" || el.tagName === "HEADER") return;
+      }
+    };
+    this.onKey = (e) => {
+      // Shift+N is the private reset: all achievements locked, neighbour back.
+      if ((e.key === "N" || e.key === "n") && e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        try {
+          localStorage.removeItem("ak-portfolio-npc");
+          localStorage.removeItem("ak-portfolio-ach");
+        } catch (err) {}
+        this.prog = { cases: {}, samples: {}, tabs: {}, bottom: false };
+        this.setState({ npcGone: false, unlocked: [] });
+        this.showToast(COPY[this.state.lang].toast.backTitle, COPY[this.state.lang].toast.backText, "");
+        return;
+      }
+      if (!this.state.zoomList) return;
+      if (e.key === "Escape") this.setState({ zoomList: null });
+      else if (e.key === "ArrowRight") this.stepZoom(1);
+      else if (e.key === "ArrowLeft") this.stepZoom(-1);
+    };
+    document.addEventListener("click", this.onDocClick, true);
+    window.addEventListener("keydown", this.onKey);
+  }
+
+  applyLang(lang) {
+    document.documentElement.lang = lang;
+  }
+
+  applyTheme(dark) {
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  }
+
+  save(next) {
+    try { localStorage.setItem("ak-portfolio-prefs", JSON.stringify(next)); } catch (e) {}
+  }
+
+  showToast(title, text, count) {
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: { title, text, count: count || "" } });
+    this.toastTimer = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+
+  unlock(id) {
+    if (this.state.unlocked.indexOf(id) >= 0) return;
+    const next = this.state.unlocked.concat([id]);
+    this.setState({ unlocked: next });
+    try { localStorage.setItem("ak-portfolio-ach", JSON.stringify(next)); } catch (e) {}
+    const a = COPY[this.state.lang].ach[id];
+    if (a) this.showToast(a.title, a.text, next.length + "/4");
+  }
+
+  markTab(pi, ti) {
+    this.prog.tabs[pi + "-" + ti] = true;
+    this.checkComplete();
+  }
+
+  checkComplete() {
+    const t = COPY[this.state.lang];
+    const cases = Object.keys(this.prog.cases).length;
+    const samples = Object.keys(this.prog.samples).length;
+    if (this.prog.bottom && cases >= t.projects.length && samples >= t.stories.length) this.unlock("complete");
+  }
+
+  toggleStory(i) {
+    const wasOpen = !!this.state.story[i];
+    this.flip("story", i);
+    // Closing the first story's sample makes the smoking neighbour vanish for good.
+    if (!wasOpen) { this.prog.samples[i] = true; this.checkComplete(); }
+    if (i === 0 && wasOpen && !this.state.npcGone) {
+      try { localStorage.setItem("ak-portfolio-npc", "gone"); } catch (e) {}
+      this.setState({ npcGone: true });
+      this.unlock("neighbour");
+    }
+  }
+
+  flip(key, i) {
+    this.setState((s) => {
+      const arr = s[key].slice();
+      arr[i] = !arr[i];
+      return { [key]: arr };
+    });
+  }
+
+  setAt(key, i, v) {
+    this.setState((s) => {
+      const arr = s[key].slice();
+      arr[i] = v;
+      return { [key]: arr };
+    });
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = COPY[lang];
+    const ticker = t.ticker.map((s, i) => React.createElement("span", { key: i }, s));
+
+    // Files shipped with the project, keyed by carousel index — these load from
+    // disk instead of the image store, so they cost it nothing.
+    const PRESET_SHOTS = {
+      0: [
+        "The cover art.png",
+        "The main menu.png",
+        "The game mechanics.png",
+        "u+pdsz.png",
+        "The design and revision of the road.png",
+        "A closer look at the Shop overhaul.png",
+        "A closer look at the Rundown Home overhaul.png",
+        "A closer look at the Saloon overhaul.png",
+        "The interior of the Saloons' first floor.png",
+        "The interior of the Saloons' second floor.png",
+        "The interior of one of the Saloons' rentable rooms.png",
+        "A closer look at the Workshop overhaul.png",
+        "The interior of the Workshop.png"
+      ].reduce((m, f, i) => (m[i] = "uploads/" + encodeURIComponent(f), m), {}),
+      1: [
+        "Exhibition of Nexus at Mb21.jpg",
+        "Nexus unpacked.jpg",
+        "Game board with cards and instruction manual.png",
+        "The main menu of the app.png",
+        "An ingame screenshot of the app.png",
+        "Element cards, trump cards, game board and task cards with solutions.png"
+      ].reduce((m, f, i) => (m[i] = "uploads/" + encodeURIComponent(f), m), {}),
+      2: {
+        0: "uploads/BoneheartsKeyartHorizontalWithLogo-b1c2bebc.png",
+        1: "uploads/GRERJk.gif",
+        2: "uploads/3HAzcy.gif",
+        3: "uploads/gUzDcG-f7abcd61.gif",
+        4: "uploads/nTukLv-04f58fd7.gif"
+      }
+    };
+
+    const PRESET_PANEL = {
+      "p1-t4-1": "uploads/" + encodeURIComponent("GAmes Kickstart Urkunde_Tears-1.png"),
+      "p1-t5-1": "uploads/p1-t5-1.webp",
+      "p1-t5-2": "uploads/p1-t5-2.webp",
+      "p2-t2-1": "uploads/p2-t2-1.webp",
+      "p2-t2-2": "uploads/p2-t2-2.webp",
+      "p2-t2-3": "uploads/p2-t2-3.webp",
+      "p2-t3-1": "uploads/p2-t3-1.webp",
+      "p2-t3-2": "uploads/p2-t3-2.webp",
+      "p2-t3-3": "uploads/p2-t3-3.webp",
+      "p2-t3-4": "uploads/p2-t3-4.webp",
+      "p2-t3-5": "uploads/p2-t3-5.webp",
+      "p2-t3-6": "uploads/" + encodeURIComponent("Nexus digital game.gif")
+    };
+
+    const projects = t.projects.map((p, pi) => {
+      const idx = this.state.gal[pi] || 0;
+      const n = p.hints.length;
+      const tabList = p.tabs.filter((tb) => !tb.hidden);
+      const ti = Math.min(this.state.tab[pi] || 0, tabList.length - 1);
+      const panel = tabList[ti];
+      // Slot ids key off the tab's position in the untouched tab list, so
+      // they stay the same in both languages.
+      const tabKey = p.tabs.indexOf(panel) + 1;
+      // The Nexus competitions tab has its own stacked layout (below), so it
+      // contributes no generic shots.
+      const awardTrio = pi === 1 && tabKey === 5;
+      const panelShots = awardTrio ? [] : (panel.shots || []).map((h, i) => ({
+        id: `p${pi + 1}-t${tabKey}-${i + 1}`,
+        hint: h,
+        src: PRESET_PANEL[`p${pi + 1}-t${tabKey}-${i + 1}`] || ""
+      }));
+      const setIdx = (v) => this.setAt("gal", pi, (v + n) % n);
+      const MECH_IMAGES = [
+        { src: "uploads/cropped%20version%20of%20our%20dialogue%20flowchart.png", alt: t.mechShots[0] },
+        { src: "uploads/cropped%20version%20of%20our%20branch%20flowchart.png", alt: t.mechShots[1] },
+        { src: "uploads/Mechanikerin_Walking_Right.gif", alt: t.mechShots[2], render: "pixelated" },
+        { src: "uploads/Mechanikerin_Walking_Left.gif", alt: t.mechShots[3], render: "pixelated" },
+        { src: "uploads/Mechanikerin_TakingItems_Right.gif", alt: t.mechShots[4], render: "pixelated" },
+        { src: "uploads/Mechanikerinbreathinganimation.gif", alt: t.mechShots[5], render: "pixelated" }
+      ];
+      const AWARD_IMAGES = [
+        { src: "uploads/mb21.jpg", alt: panel.shots ? panel.shots[0] : "" },
+        { src: "uploads/GAmes%20Kickstart%20Urkunde_Nexus-1.png", alt: panel.shots ? panel.shots[1] : "" },
+        { src: "uploads/mint21.webp", alt: panel.shots ? panel.shots[2] : "" }
+      ];
+      const carRaw = panel.mech ? MECH_IMAGES
+        : (awardTrio ? AWARD_IMAGES
+        : panelShots.map((ps) => ({ src: ps.src, alt: ps.hint, id: ps.id, slot: !ps.src })));
+      const cKey = pi + "-" + tabKey;
+      const cN = carRaw.length;
+      const cIdx = cN ? ((this.state.panelIdx || {})[cKey] || 0) % cN : 0;
+      const setC = (v) => {
+        const next = { ...(this.state.panelIdx || {}) };
+        next[cKey] = (v + cN) % cN;
+        this.setState({ panelIdx: next });
+      };
+      return {
+        num: "0" + (pi + 1),
+        title: p.title, tags: p.tags, lead: p.lead, body: p.body, links: p.links, hasCat: !!p.hasCat,
+        shots: p.hints.map((h, si) => {
+          const src = (PRESET_SHOTS[pi] || {})[si] || "";
+          return { id: `p${pi + 1}-${si + 1}`, hint: h, src, slotRef: (el) => { if (el && src) el.setAttribute("src", src); } };
+        }),
+        shift: `-${idx * 100}%`,
+        counter: (pi === 2 && idx === 2) ? "99 / 5" : `${idx + 1} / ${n}`,
+        bugActive: pi === 2 && idx === 2,
+        bugQuiet: !(pi === 2 && idx === 2),
+        qaClick: () => this.unlock("qa"),
+        caption: p.hints[idx] || "",
+        shotCaptions: p.hints.map((h, i) => ({ text: h, disp: i === idx ? "inline" : "none" })),
+        prev: () => setIdx(idx - 1),
+        next: () => setIdx(idx + 1),
+        dots: p.hints.map((_, si) => ({
+          color: si === idx ? "var(--accent)" : "var(--line)",
+          go: () => setIdx(si)
+        })),
+        isOpen: !!this.state.open[pi],
+        openLabel: this.state.open[pi] ? t.openLess : t.openMore,
+        chevron: this.state.open[pi] ? "180deg" : "0deg",
+        toggleOpen: () => {
+          if (!this.state.open[pi]) { this.prog.cases[pi] = true; this.checkComplete(); }
+          this.flip("open", pi);
+        },
+        hasAward: !!(p.awards || p.award),
+        awardList: (p.awards || (p.award ? [p.award] : [])).map((text, ai) => ({ text, key: ai })),
+        award: p.award || "",
+        awardKicker: t.awardKicker,
+
+        tabs: tabList.map((tb, tbi) => ({
+          label: tb.label,
+          bg: tbi === ti ? "var(--accent)" : "transparent",
+          color: tbi === ti ? "#282828" : "var(--muted)",
+          border: tbi === ti ? "var(--accent)" : "var(--line)",
+          go: () => { this.markTab(pi, tbi); this.setAt("tab", pi, tbi); }
+        })),
+        panelTitle: panel.title,
+        panelText: panel.a,
+        panelText2: panel.b,
+        panelText3: panel.c || "",
+        hasPanelText3: !!panel.c,
+        panelText4: panel.d || "",
+        hasPanelText4: !!panel.d,
+        panelCar: carRaw.map((c) => ({
+          src: c.src, srcCss: c.src ? "url(" + c.src + ")" : "none", alt: c.alt || "", id: c.id || "",
+          render: c.render || "auto",
+          hasImg: !c.slot, isSlot: !!c.slot,
+          slotRef: (el) => { if (el && c.src) el.setAttribute("src", c.src); }
+        })),
+        panelMulti: cN > 1,
+        panelShift: "-" + cIdx * 100 + "%",
+        panelCounter: cN ? cIdx + 1 + " / " + cN : "",
+        panelCaption: cN ? (carRaw[cIdx].alt || "") : "",
+        panelCaptions: tabList.reduce((acc, tb, tbi) => {
+          const alts = tb.mech ? t.mechShots : (tb.shots || []);
+          alts.forEach((a, i) => acc.push({ text: a, disp: (tbi === ti && i === cIdx) ? "inline" : "none" }));
+          return acc;
+        }, []),
+        panelPrev: () => setC(cIdx - 1),
+        panelDots: carRaw.map((_, i) => ({ color: i === cIdx ? "var(--accent)" : "var(--line)", go: () => setC(i) })),
+        panelNext: () => setC(cIdx + 1),
+        hasPanelMedia: cN > 0,
+        panelCols: cN > 0 ? "repeat(auto-fit,minmax(300px,1fr))" : "minmax(0,1fr)"
+      };
+    });
+
+    // Reading samples are the original English prose and stay identical in both languages.
+    const EXCERPTS = [
+      [
+        "The first neighbor disappeared on a Tuesday.",
+        "She noticed because his door was always open in the mornings. He would sit in the hallway with a cup of coffee balanced on one knee, greeting everyone who passed as though he had been waiting specifically for them.",
+        "That Tuesday, the door was closed.",
+        "A single note had been pinned to it.",
+        "She didn't read it. Not then.",
+        "She had only moved into the apartment complex three weeks ago and was still learning its rhythms: which floorboards creaked, which neighbors avoided eye contact and who could be counted on to appear at precisely the same time each morning.",
+        "The man in apartment twelve had been one of those constants.",
+        "But people left. Plans changed. She told herself it was nothing.",
+        "The next morning, another door was closed.",
+        "Another note.",
+        "This time, she stopped.",
+        "The paper fluttered gently beneath her fingers, but before she could read the first line, a voice called from behind her.",
+        "\u201cI wouldn't do that.\u201d",
+        "She turned.",
+        "An elderly woman stood at the end of the corridor, clutching a bag of groceries to her chest.",
+        "\u201cDo what?\u201d",
+        "The woman's eyes moved from her to the note.",
+        "Then back again.",
+        "\u201cAsk questions.\u201d"
+      ],
+      [
+        "The woman woke underwater.",
+        "Her first thought was that this was inconvenient.",
+        "Her second was that she was drowning.",
+        "She kicked desperately toward the light, lungs burning, clothes dragging her deeper. Her fingers finally broke through the surface, followed by her head and she gasped so violently that she swallowed more water.",
+        "Wonderful.",
+        "She dragged herself onto the riverbank and collapsed into the mud.",
+        "For several minutes, she simply lay there.",
+        "Then the memories arrived.",
+        "A cliff.",
+        "A struggle.",
+        "Hands pushing against her back.",
+        "The terrible moment of weightlessness before the fall.",
+        "But they weren't her memories.",
+        "She sat up slowly.",
+        "Long black hair clung to her face. Her clothes were unfamiliar. Her hands were too pale, too delicate and definitely not hers.",
+        "\"No.\"",
+        "She knew this story.",
+        "She knew this woman.",
+        "The villainess. Cruel. Arrogant. Hated by virtually everyone with a speaking role.",
+        "And, if she remembered correctly, supposed to be dead.",
+        "Voices echoed through the trees.",
+        "Someone was coming.",
+        "She had seconds to decide what to do.",
+        "Running was impossible. Explaining the truth would make her sound insane. Pretending nothing had happened would be even worse.",
+        "So when the first stranger burst through the trees and stared at her in horror, she did the only reasonable thing.",
+        "She blinked.",
+        "\"Who are you?\"",
+        "The stranger froze.",
+        "She touched her forehead and forced her expression into confusion.",
+        "\"And... who am I?\"",
+        "It was a terrible plan.",
+        "But it was better than being thrown off another cliff."
+      ],
+      [
+        "\"Again.\"",
+        "Raziel groaned.",
+        "\"My arms hurt.\"",
+        "\"They'll hurt more when someone cuts them off.\"",
+        "The boy stared at him.",
+        "Ephraim stared back.",
+        "\"Mother says you're supposed to encourage me.\"",
+        "\"I am encouraging you to keep your arms.\"",
+        "Raziel sighed dramatically and raised the wooden sword again.",
+        "At nineteen, Ephraim was neither the tallest nor the strongest man in the village. He was leaner than most, quieter too and rarely showed enough emotion for anyone to know what he was thinking.",
+        "Except when it came to Raziel.",
+        "He would have burned kingdoms for his brother.",
+        "He simply wasn't very good at saying so.",
+        "\"Your stance is wrong.\"",
+        "\"It's the same as before.\"",
+        "\"It was wrong before.\"",
+        "\"You said it was better!\"",
+        "\"Better doesn't mean good.\"",
+        "Raziel opened his mouth to complain.",
+        "Then the bells began to ring.",
+        "Once.",
+        "Twice.",
+        "Three times.",
+        "Ephraim's expression changed.",
+        "Raziel lowered his sword.",
+        "\"What does that mean?\"",
+        "Beyond the hills, black sails appeared on the horizon.",
+        "Ephraim took the wooden sword from his brother's hands.",
+        "\"Go home.\"",
+        "\"But-\"",
+        "\"Now.\"",
+        "For once, Raziel didn't argue."
+      ]
+    ];
+
+    const stories = t.stories.map((s, si) => ({
+      title: s.title, genre: s.genre, logline: s.logline, hint: s.hint,
+      src: [
+        "uploads/" + encodeURIComponent("PXL_20260227_163537895_12.jpg"),
+        "uploads/" + encodeURIComponent("IMG-20210831-WA0025_12.jpg"),
+        "uploads/" + encodeURIComponent("IMG_20200825_2017222.jpg")
+      ][si],
+      hasNpc: si === 0 && !this.state.npcGone && !this.state.story[0],
+      slot: `story-${si + 1}`,
+      order: si % 2 === 1 ? 2 : 0,
+      open: !!this.state.story[si],
+      flip: this.state.story[si] ? "180deg" : "0deg",
+      // Whichever face is showing sits in normal flow and drives the card height,
+      // so the excerpt is never clipped and never needs a fixed guess.
+      frontPos: this.state.story[si] ? "absolute" : "relative",
+      backPos: this.state.story[si] ? "relative" : "absolute",
+      backMinH: this.state.story[si] ? "340px" : "0px",
+      frontPE: this.state.story[si] ? "none" : "auto",
+      backPE: this.state.story[si] ? "auto" : "none",
+      excerpt: EXCERPTS[si] || [t.excerptPending],
+      label: this.state.story[si] ? t.hideSample : t.readSample,
+      toggle: () => this.toggleStory(si)
+    }));
+
+    const WIDE = { content9: 1, content10: 1, content11: 1, content12: 1 };
+    const RITE_BOARDS = [
+      "content1", "content2", "content3", "content4", "content5", "content6", "content7", "content8",
+      "content9", "content10", "content11", "content12", "content13", "content14", "content15", "content52"
+    ].map((n, i) => ({
+      src: `uploads/${n}.png`,
+      alt: (lang === "de" ? "Storyboard " : "Storyboard ") + (i + 1),
+      span: WIDE[n] ? 1 : 2
+    }));
+
+    const PERSONAL = [
+      "BunnyLogo.png", "7e9fbc8e-82f6-4f7a-bf2e-d9bbbb99b4d1.png", "Bday_Perv.png",
+      "pepehii.png", "Banner (1).png", "Taube.gif",
+      "WhatsApp Bild 2024-05-02 um 20.18.22_5c406981.jpg", "WhatsApp Bild 2024-05-02 um 20.18.23_298d116e.jpg", "Bear.png",
+      "Bunny1,5year.png", "IMG_0143.png", "flowerhat bunny.png",
+      "Bday_Nev.png"
+    ].map((f, i) => ({ src: "uploads/" + encodeURIComponent(f), alt: `${t.artGroups[2].title} ${i + 1}` }));
+
+    const artGroups = t.artGroups.map((g, gi) => {
+      const images = gi === 0 ? RITE_BOARDS : [];
+      const pair = gi === 1 ? (t.boneHints || []) : [];
+      const masonry = gi === 2 ? PERSONAL : [];
+      const PAIR_SRC = ["uploads/IMG_0934.png", "uploads/IMG_0937.png"];
+      const pairN = pair.length;
+      const pairIdx = pairN ? ((this.state.pairIdx || 0) % pairN + pairN) % pairN : 0;
+      const setPair = (v) => this.setState({ pairIdx: ((v % pairN) + pairN) % pairN });
+      const headRow = gi === 0 || gi === 1;
+      const boardN = images.length;
+      const boardIdx = boardN ? (((this.state.boardIdx || 0) % boardN) + boardN) % boardN : 0;
+      const setBoard = (v) => this.setState({ boardIdx: ((v % boardN) + boardN) % boardN });
+      return {
+        title: g.title, role: g.role, text: g.text,
+        boardShift: `-${boardIdx * 100}%`,
+        boardImages: images.map((im) => ({ alt: im.alt, src: im.src, srcCss: `url("${im.src}")` })),
+        boardCounter: boardN ? `${boardIdx + 1} / ${boardN}` : "",
+        boardCaption: boardN ? (images[boardIdx].alt || "") : "",
+        boardPrev: () => setBoard(boardIdx - 1),
+        boardNext: () => setBoard(boardIdx + 1),
+        pairImages: pair.map((h, i) => ({ alt: h, srcCss: `url("${PAIR_SRC[i]}")`, src: PAIR_SRC[i] })),
+        pairShift: `-${pairIdx * 100}%`,
+        pairCounter: pairN ? `${pairIdx + 1} / ${pairN}` : "",
+        pairCaption: pairN ? pair[pairIdx] : "",
+        pairPrev: () => setPair(pairIdx - 1),
+        pairDots: pair.map((_, i) => ({ color: i === pairIdx ? "var(--accent)" : "var(--line)", go: () => setPair(i) })),
+        pairNext: () => setPair(pairIdx + 1),
+        textBreak: headRow ? "auto" : "avoid",
+        textCols: headRow ? "3" : "160px 3",
+        headSpan: headRow ? "1 / -1" : "auto",
+        headDisp: headRow ? "flex" : "block",
+        headLinkTop: headRow ? "0" : "clamp(18px,2.4vw,26px)",
+        textMax: "none",
+        headGap: headRow ? "clamp(16px,2vw,28px)" : "clamp(18px,3vw,44px)",
+        rule: gi === 0 ? "0" : "1px solid var(--line)",
+        rulePad: gi === 0 ? "0" : "clamp(40px,6vw,84px)",
+        text2: g.text2 || "", hasText2: !!g.text2,
+        text3: g.text3 || "", hasText3: !!g.text3,
+        text4: g.text4 || "", hasText4: !!g.text4,
+        hasLink: !!g.href, href: g.href, linkLabel: g.linkLabel,
+        images, hasImages: images.length > 0,
+        isPair: images.length === 0 && pair.length > 0,
+        forgeHint: pair[0] || "",
+        merchantHint: pair[1] || "",
+        linkInText: !!g.href && !headRow,
+        linkInPair: !!g.href && headRow,
+        textFlex: "1 1 100%",
+        headCols: gi === 2 ? "minmax(200px,240px) minmax(0,1fr)" : (headRow ? "minmax(0,1fr)" : "repeat(auto-fit,minmax(280px,1fr))"),
+        textSpan: gi === 0 ? "1 / -1" : "auto",
+        masonry,
+        isMasonry: masonry.length > 0,
+        noImages: images.length === 0 && pair.length === 0 && masonry.length === 0,
+        slots: SPANS.map((sp, i) => ({ id: `art-${gi + 1}-${i + 1}`, span: sp, hint: g.hint }))
+      };
+    });
+
+    return {
+      t, projects, stories, artGroups,
+      hasToast: !!this.state.toast,
+      toastKicker: t.toast.kicker,
+      toastTitle: this.state.toast ? this.state.toast.title : "",
+      toastText: this.state.toast ? this.state.toast.text : "",
+      toastCount: this.state.toast ? this.state.toast.count : "",
+      hasToastCount: !!(this.state.toast && this.state.toast.count),
+      legalOpen: !!this.state.legal,
+      legalTitle: this.state.legal === "priv" ? t.priv.title : t.imp.title,
+      legalBlocks: (this.state.legal === "priv" ? t.priv.blocks : t.imp.blocks).map((b, i) => ({ h: b.h, p: b.p, key: i })),
+      openImp: () => this.setState({ legal: "imp" }),
+      openPriv: () => this.setState({ legal: "priv" }),
+      closeLegal: () => this.setState({ legal: null }),
+      stopLegal: (e) => e.stopPropagation(),
+      hasLightbox: !!this.state.zoomList,
+      lightboxImgRef: this.lightboxImgRef,
+      zoomCounter: this.state.zoomList ? `${(this.state.zoomIndex || 0) + 1} / ${this.state.zoomList.length}` : "",
+      manyZoom: !!this.state.zoomList && this.state.zoomList.length > 1,
+      closeLightbox: () => this.setState({ zoomList: null }),
+      prevZoom: (e) => { e.stopPropagation(); this.stepZoom(-1); },
+      nextZoom: (e) => { e.stopPropagation(); this.stepZoom(1); },
+      stopZoomClick: (e) => e.stopPropagation(),
+      contacts: t.contacts.map((c) => ({ ...c, target: c.href.startsWith("mailto:") ? "_self" : "_blank" })),
+      tickerA: ticker, tickerB: ticker,
+      langLabel: lang === "de" ? "DE" : "EN",
+      langOther: lang === "de" ? "EN" : "DE",
+      themeIcon: this.state.dark ? "☾" : "☀",
+      year: 2026,
+      glowRef: this.glowRef, ringRef: this.ringRef, heroRef: this.heroRef, portraitRef: this.portraitRef,
+      editMode: !!this.state.editMode,
+      editBtnLabel: lang === "de" ? (this.state.editMode ? "Fertig" : "Text") : (this.state.editMode ? "Done" : "Text"),
+      editBtnTitle: lang === "de" ? "Texte bearbeiten" : "Edit text",
+      editBarHint: lang === "de" ? "Texte bearbeiten — klicke in einen Text und schreibe" : "Editing text — click any text and type",
+      editSaveLabel: this.state.savedFlag ? (lang === "de" ? "Gespeichert ✓" : "Saved ✓") : (lang === "de" ? "Speichern" : "Save"),
+      editResetLabel: lang === "de" ? "Zurücksetzen" : "Reset",
+      editBtnBg: this.state.editMode ? "var(--accent)" : "transparent",
+      editBtnFg: this.state.editMode ? "#282828" : "var(--fg)",
+      toggleEdit: () => {
+        const on = !this.state.editMode;
+        if (!on) this.saveTexts();
+        this.setState({ editMode: on });
+      },
+      saveTextsNow: () => {
+        this.saveTexts();
+        clearTimeout(this._savedFlagT);
+        this.setState({ savedFlag: true });
+        this._savedFlagT = setTimeout(() => this.setState({ savedFlag: false }), 2000);
+      },
+      resetTextsNow: () => this.resetTexts(),
+      toggleLang: () => {
+        const next = lang === "de" ? "en" : "de";
+        this.applyLang(next);
+        this.setState({ lang: next });
+        this.save({ lang: next, dark: this.state.dark });
+      },
+      toggleTheme: () => {
+        const dark = !this.state.dark;
+        this.applyTheme(dark);
+        this.setState({ dark });
+        this.save({ lang, dark });
+      },
+      tiltMove: (e) => {
+        const el = e.currentTarget;
+        const r = el.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width - 0.5;
+        const dy = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(1200px) rotateY(${dx * 3.2}deg) rotateX(${dy * -3.2}deg) translateY(-4px)`;
+      },
+      tiltLeave: (e) => { e.currentTarget.style.transform = "none"; }
+    };
+  }
+}
+
+</script>
+</body>
+</html>
